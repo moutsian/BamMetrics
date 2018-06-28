@@ -40,8 +40,7 @@ trait BamMetrics extends Pipeline with Reference {
     }
   }
 
-  def prefix: String =
-    new File(outputDir, bamFile.getName.stripSuffix(".bam")).getAbsolutePath
+  def prefix: String = bamFile.getName.stripSuffix(".bam")
 
   override def inputs: Map[String, Any] =
     super.inputs ++
