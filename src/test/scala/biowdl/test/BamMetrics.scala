@@ -25,7 +25,6 @@ import java.io.File
 
 import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
-import nl.biopet.utils.ngs.vcf.getVcfIndexFile
 
 trait BamMetrics extends Pipeline with Reference {
 
@@ -40,6 +39,9 @@ trait BamMetrics extends Pipeline with Reference {
       case _         => throw new IllegalStateException("No index found")
     }
   }
+
+  def prefix: String =
+    new File(outputDir, bamFile.getName.stripSuffix(".bam")).getAbsolutePath
 
   override def inputs: Map[String, Any] =
     super.inputs ++
