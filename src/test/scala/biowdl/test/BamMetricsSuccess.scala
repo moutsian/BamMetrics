@@ -26,6 +26,4 @@ import java.io.File
 import nl.biopet.utils.biowdl.PipelineSuccess
 import nl.biopet.utils.ngs.vcf.getVcfIndexFile
 
-trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
-
-}
+trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {}

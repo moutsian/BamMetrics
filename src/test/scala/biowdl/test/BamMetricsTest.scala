@@ -26,8 +26,6 @@ import java.io.File
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
 
-class BamMetricsTest
-    extends BamMetricsSuccess
-    with TestReference {
+class BamMetricsTest extends BamMetricsSuccess with TestReference {
   def bamFile: File = fixtureFile("samples", "wgs1", "wgs1.bam")
 }
