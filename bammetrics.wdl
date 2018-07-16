@@ -37,7 +37,7 @@ workflow BamMetrics {
         Map[String, String] strandednessConversion = {"None": "NONE",
             "FR":"FIRST_READ_TRANSCRIPTION_STRAND", "RF": "SECOND_READ_TRANSCRIPTION_STRAND"}
 
-        call picard.CollectRnaSeqMetrics as rnaMetrics {
+        call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
                 bamFile = bamFile,
                 bamIndex = bamIndex,
