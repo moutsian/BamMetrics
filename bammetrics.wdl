@@ -13,6 +13,8 @@ workflow BamMetrics {
     String? strandedness = "None"
 
     Boolean? targeted = false
+    Array[File]+? targetIntervals = [""] #To avoid having to give this, even if targeted is false
+    File? ampliconIntervals = "" #To avoid having to give this, even if targeted is false
 
     String prefix = outputDir + "/" + basename(bamFile, ".bam")
 
@@ -54,7 +56,9 @@ workflow BamMetrics {
                 refFasta = refFasta,
                 refDict = refDict,
                 refFastaIndex = refFastaIndex,
-                basename = prefix
+                basename = prefix,
+                targetIntervals = targetIntervals,
+                ampliconIntervals = ampliconIntervals
         }
     }
 }
