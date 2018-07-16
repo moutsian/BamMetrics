@@ -9,7 +9,6 @@ workflow BamMetrics {
     File refDict
     File refFastaIndex
 
-    Boolean? rnaMetrics = false
     File? refRefflat
     String? strandedness = "None"
 
@@ -33,7 +32,7 @@ workflow BamMetrics {
             refFastaIndex = refFastaIndex
     }
 
-    if (rnaMetrics) {
+    if (defined(refRefflat)) {
         Map[String, String] strandednessConversion = {"None": "NONE",
             "FR":"FIRST_READ_TRANSCRIPTION_STRAND", "RF": "SECOND_READ_TRANSCRIPTION_STRAND"}
 
@@ -47,7 +46,7 @@ workflow BamMetrics {
         }
     }
 
-    if (targeted) {
+    if (select_first([targeted])) {
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
                 bamFile = bamFile,
