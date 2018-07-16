@@ -29,3 +29,10 @@ import nl.biopet.utils.biowdl.fixtureFile
 class BamMetricsTest extends BamMetricsSuccess with TestReference {
   def bamFile: File = fixtureFile("samples", "wgs1", "wgs1.bam")
 }
+
+class BamMetricsRnaTest extends BamMetricsSuccess with TestReference with TestAnnotation {
+  def bamFile: File = fixtureFile("sample", "rna3", "rna3.bam")
+  def rna: Boolean = true
+}
+
+//TODO targeted
