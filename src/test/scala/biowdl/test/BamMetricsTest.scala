@@ -23,6 +23,7 @@ package biowdl.test
 
 import java.io.File
 
+import nl.biopet.utils.biowdl.annotations.TestAnnotation
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
 

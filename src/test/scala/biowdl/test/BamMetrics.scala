@@ -43,8 +43,8 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
 
   def rna: Boolean = false
   def targeted: Boolean = false
-  def targetIntervals: List[File] = List(File(""))
-  def ampliconIntervals: File = File("")
+  def targetIntervals: List[File] = List(new File(""))
+  def ampliconIntervals: File = new File("")
 
   def prefix: String = bamFile.getName.stripSuffix(".bam")
 
@@ -60,10 +60,8 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
         "BamMetrics.targeted" -> targeted,
         "BamMetrics.targetIntervals" -> targetIntervals.map(_.getAbsolutePath),
         "BamMetrics.ampliconIntervals" -> ampliconIntervals.getAbsolutePath
-      ) ++ {
-      if (rna) {
-        "BamMetrics.refRefflat" -> referenceRefflat.map(_.getAbsolutePath)
-      }
+        "BamMetrics.refRefflat" - > if (rna) {referenceRefflat.map(_.getAbsolutePath)} else {None}
+      )
     }
 
   def startFile: File = new File("./bammetrics.wdl")
