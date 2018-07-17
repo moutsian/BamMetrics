@@ -27,7 +27,7 @@ import nl.biopet.utils.biowdl.annotations.TestAnnotation
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
 
-class BamMetricsTest extends BamMetricsSuccess with TestReference {
+class BamMetricsTest extends BamMetricsSuccess with TestReference with TestAnnotation {
   def bamFile: File = fixtureFile("samples", "wgs1", "wgs1.bam")
 }
 
@@ -36,7 +36,7 @@ class BamMetricsRnaTest
     with TestReference
     with TestAnnotation {
   def bamFile: File = fixtureFile("sample", "rna3", "rna3.bam")
-  def rna: Boolean = true
+  def override rna: Boolean = true
 }
 
 //TODO targeted
