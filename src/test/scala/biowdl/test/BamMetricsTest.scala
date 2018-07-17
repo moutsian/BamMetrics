@@ -38,7 +38,7 @@ class BamMetricsRnaTest
     extends BamMetricsSuccess
     with TestReference
     with TestAnnotation {
-  def bamFile: File = fixtureFile("sample", "rna3", "rna3.bam")
+  def bamFile: File = fixtureFile("samples", "rna3", "rna3.bam")
   override def rna: Boolean = true
 }
 
