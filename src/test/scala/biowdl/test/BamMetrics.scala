@@ -59,10 +59,12 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
         "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath,
         "BamMetrics.targeted" -> targeted,
         "BamMetrics.targetIntervals" -> targetIntervals.map(_.getAbsolutePath),
-        "BamMetrics.ampliconIntervals" -> ampliconIntervals.getAbsolutePath
-        "BamMetrics.refRefflat" - > if (rna) {referenceRefflat.map(_.getAbsolutePath)} else {None}
+        "BamMetrics.ampliconIntervals" -> ampliconIntervals.getAbsolutePath,
+        "BamMetrics.refRefflat" -> {
+          if (rna) referenceRefflat.map(_.getAbsolutePath)
+          else None
+        }
       )
-    }
 
   def startFile: File = new File("./bammetrics.wdl")
 }
