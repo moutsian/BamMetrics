@@ -44,9 +44,9 @@ trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
   addMustHaveFile(prefix + ".quality_distribution.pdf")
   addMustHaveFile(prefix + ".quality_yield_metrics")
 
-  if (refRefflat != None) {
+  if (rna) {
     addMustHaveFile(prefix + ".RNA_Metrics.pdf")
-    addMustHavefile(prefix + ".RNA_Metrics")
+    addMustHaveFile(prefix + ".RNA_Metrics")
   }
 
   if (targeted) {
