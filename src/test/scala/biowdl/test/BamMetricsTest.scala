@@ -42,9 +42,8 @@ class BamMetricsRnaTest
   override def rna: Boolean = true
 }
 
-class BamMetricsRnaStrandednessTest
-  extends BamMetricsRnaTest {
-  override def strandedness: String = "None"
+class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
+  override def strandedness: Option[String] = Some("None")
 }
 
 //TODO targeted

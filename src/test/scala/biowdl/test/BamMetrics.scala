@@ -58,11 +58,14 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
         "BamMetrics.bamFile" -> bamFile.getAbsolutePath,
         "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath,
         "BamMetrics.targetIntervals" -> {
-          targetIntervals match  {
-            case Some(_) => targetIntervals.getOrElse(List()).map(_.getAbsolutePath)
-            case _  => None
-        }},
-        "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(_.getAbsolutePath),
+          targetIntervals match {
+            case Some(_) =>
+              targetIntervals.getOrElse(List()).map(_.getAbsolutePath)
+            case _ => None
+          }
+        },
+        "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(
+          _.getAbsolutePath),
         "BamMetrics.refRefflat" -> {
           if (rna) referenceRefflat.map(_.getAbsolutePath)
           else None
