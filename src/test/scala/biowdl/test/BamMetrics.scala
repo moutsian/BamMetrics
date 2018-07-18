@@ -48,6 +48,18 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
 
   def prefix: String = bamFile.getName.stripSuffix(".bam")
 
+  def targetedMap: Map[String, Any] = targetIntervals match {
+    case Some(_) =>
+      Map(
+        "BamMetrics.targetIntervals" -> targetIntervals
+          .getOrElse(List())
+          .map(_.getAbsolutePath),
+        "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(
+          _.getAbsolutePath)
+      )
+    case _ => Map()
+  }
+
   override def inputs: Map[String, Any] =
     super.inputs ++
       Map(
@@ -57,21 +69,12 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
         "BamMetrics.refDict" -> referenceFastaDictFile.getAbsolutePath,
         "BamMetrics.bamFile" -> bamFile.getAbsolutePath,
         "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath,
-        "BamMetrics.targetIntervals" -> {
-          targetIntervals match {
-            case Some(_) =>
-              targetIntervals.getOrElse(List()).map(_.getAbsolutePath)
-            case _ => None
-          }
-        },
-        "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(
-          _.getAbsolutePath),
         "BamMetrics.refRefflat" -> {
           if (rna) referenceRefflat.map(_.getAbsolutePath)
           else None
         },
         "BamMetrics.strandedness" -> strandedness.getOrElse(None)
-      )
+      ) ++ targetedMap
 
   def startFile: File = new File("./bammetrics.wdl")
 }
