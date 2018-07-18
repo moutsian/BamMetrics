@@ -42,4 +42,13 @@ class BamMetricsRnaTest
   override def rna: Boolean = true
 }
 
+class BamMetricsRnaStrandednessTest
+  extends BamMetricsSuccess
+    with TestReference
+    with TestAnnotation {
+  def bamFile: File = fixtureFile("samples", "rna3", "rna3.bam")
+  override def rna: Boolean = true
+  def strandedness: String = "None"
+}
+
 //TODO targeted
