@@ -42,10 +42,9 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
   }
 
   def rna: Boolean = false
-  def strandedness: Option[String]
-  def targeted: Boolean = false
-  def targetIntervals: Option[List[File]]
-  def ampliconIntervals: Option[File]
+  def strandedness: Option[String] = None
+  def targetIntervals: Option[List[File]] = None
+  def ampliconIntervals: Option[File] = None
 
   def prefix: String = bamFile.getName.stripSuffix(".bam")
 
