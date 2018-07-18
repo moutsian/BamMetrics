@@ -49,7 +49,7 @@ trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
     addMustHaveFile(prefix + ".RNA_Metrics")
   }
 
-  if (targeted) {
+  if (targetIntervals.isDefined) {
     addMustHaveFile(prefix + ".targetPcrPerTargetCoverage")
     addMustHaveFile(prefix + ".targetPcrPerBaseCoverage")
     addMustHaveFile(prefix + ".targetPcrMetrics")

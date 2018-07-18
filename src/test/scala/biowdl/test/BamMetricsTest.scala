@@ -44,7 +44,7 @@ class BamMetricsRnaTest
 
 class BamMetricsRnaStrandednessTest
   extends BamMetricsRnaTest {
-  def strandedness: String = "None"
+  override def strandedness: String = "None"
 }
 
 //TODO targeted
