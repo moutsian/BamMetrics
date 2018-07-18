@@ -37,6 +37,7 @@ workflow BamMetrics {
     if (defined(refRefflat)) {
         Map[String, String] strandednessConversion = {"None": "NONE",
             "FR":"FIRST_READ_TRANSCRIPTION_STRAND", "RF": "SECOND_READ_TRANSCRIPTION_STRAND"}
+        String strandedness2 = select_first([strandedness])
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
@@ -44,7 +45,7 @@ workflow BamMetrics {
                 bamIndex = bamIndex,
                 refRefflat = refRefflat,
                 basename = prefix,
-                strandSpecificity = strandednessConversion[select_first([strandedness])]
+                strandSpecificity = strandednessConversion[strandedness2]
         }
     }
 
