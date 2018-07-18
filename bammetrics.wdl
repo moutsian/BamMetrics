@@ -12,7 +12,6 @@ workflow BamMetrics {
     File? refRefflat
     String? strandedness = "None"
 
-    Boolean? targeted = false
     Array[File]+? targetIntervals = [""] #To avoid having to give this, even if targeted is false
     File? ampliconIntervals = "" #To avoid having to give this, even if targeted is false
 
@@ -49,7 +48,7 @@ workflow BamMetrics {
         }
     }
 
-    if (select_first([targeted])) {
+    if (defined(targetIntervals)) {
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
                 bamFile = bamFile,

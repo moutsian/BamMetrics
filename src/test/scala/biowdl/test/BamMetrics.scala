@@ -58,7 +58,6 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
         "BamMetrics.refDict" -> referenceFastaDictFile.getAbsolutePath,
         "BamMetrics.bamFile" -> bamFile.getAbsolutePath,
         "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath,
-        "BamMetrics.targeted" -> targeted,
         "BamMetrics.targetIntervals" -> targetIntervals.map(_.getAbsolutePath),
         "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(_.getAbsolutePath),
         "BamMetrics.refRefflat" -> {
