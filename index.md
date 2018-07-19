@@ -36,13 +36,13 @@ to see all available inputs.
 | targetIntervals | `Array[File]+?` | | A list of targets intervals. If this is defined targeted PCR metrics will be collected. |
 | ampliconIntervals | `File?` | | A list of amplicon intervals, required when targetIntervals is given. |
 | picardMetrics.collectGcBiasMetrics | `Boolean` | `true` | Whether or not to collect GC-bias metrics. |
-| picardMetrics.<br />collectAlignmentSummaryMetrics | `Boolean` | true | Whether or not to collect alignment summary metrics. |
+| picardMetrics.<br />collectAlignmentSummaryMetrics | `Boolean` | `true` | Whether or not to collect alignment summary metrics. |
 | picardMetrics.<br />collectSequencingArtifactMetrics | `Boolean` | `true` | Whether or not to collect sequencing artifact metrics. |
 | picardMetrics.<br />collectQualityYieldMetrics | `Boolean` | `true` | Whether or not to collect quality yield metrics. |
 | picardMetrics.<br />collectBaseDistributionByCycle | `Boolean` | `true` | Whether or not to collect base distribution by cycle metrics. |
 | picardMetrics.meanQualityByCycle | `Boolean` | `true` | Whether or not to collect mean quality by cycle metrics. |
-| picardMetrics.collectInsertSizeMetrics | `Boolean` | `true` | Whether or not to collect insert-size metrics. |
-| picardMetrics.qualityScoreDistribution | `Boolean` | `true` | Whether or not to collect quality score distribution metrics. |
+| picardMetrics.<br />collectInsertSizeMetrics | `Boolean` | `true` | Whether or not to collect insert-size metrics. |
+| picardMetrics.<br />qualityScoreDistribution | `Boolean` | `true` | Whether or not to collect quality score distribution metrics. |
 
 >All inputs have to be preceded by with `BamMetrics.`.
 Type is indicated according to the WDL data types: `File` should be indicators
