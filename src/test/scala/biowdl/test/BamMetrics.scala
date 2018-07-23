@@ -25,8 +25,9 @@ import java.io.File
 
 import nl.biopet.utils.biowdl.Pipeline
 import nl.biopet.utils.biowdl.references.Reference
+import nl.biopet.utils.biowdl.annotations.Annotation
 
-trait BamMetrics extends Pipeline with Reference {
+trait BamMetrics extends Pipeline with Reference with Annotation {
 
   def bamFile: File
 
@@ -40,6 +41,11 @@ trait BamMetrics extends Pipeline with Reference {
     }
   }
 
+  def rna: Boolean = false
+  def strandedness: Option[String] = None
+  def targetIntervals: Option[List[File]] = None
+  def ampliconIntervals: Option[File] = None
+
   def prefix: String = bamFile.getName.stripSuffix(".bam")
 
   override def inputs: Map[String, Any] =
@@ -51,7 +57,24 @@ trait BamMetrics extends Pipeline with Reference {
         "BamMetrics.refDict" -> referenceFastaDictFile.getAbsolutePath,
         "BamMetrics.bamFile" -> bamFile.getAbsolutePath,
         "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath
-      )
+      ) ++ {
+      targetIntervals match {
+        case Some(_) =>
+          Map(
+            "BamMetrics.targetIntervals" -> targetIntervals
+              .getOrElse(List())
+              .map(_.getAbsolutePath),
+            "BamMetrics.ampliconIntervals" -> ampliconIntervals.map(
+              _.getAbsolutePath)
+          )
+        case _ => Map()
+      }
+    } ++ {
+      if (rna)
+        Map("BamMetrics.strandedness" -> strandedness.getOrElse("None"),
+            "BamMetrics.refRefflat" -> referenceRefflat.map(_.getAbsolutePath))
+      else Map()
+    }
 
   def startFile: File = new File("./bammetrics.wdl")
 }

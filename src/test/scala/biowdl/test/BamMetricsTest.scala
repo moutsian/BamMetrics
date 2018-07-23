@@ -23,9 +23,27 @@ package biowdl.test
 
 import java.io.File
 
+import nl.biopet.utils.biowdl.annotations.TestAnnotation
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
 
-class BamMetricsTest extends BamMetricsSuccess with TestReference {
+class BamMetricsTest
+    extends BamMetricsSuccess
+    with TestReference
+    with TestAnnotation {
   def bamFile: File = fixtureFile("samples", "wgs1", "wgs1.bam")
 }
+
+class BamMetricsRnaTest
+    extends BamMetricsSuccess
+    with TestReference
+    with TestAnnotation {
+  def bamFile: File = fixtureFile("samples", "rna3", "rna3.bam")
+  override def rna: Boolean = true
+}
+
+class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
+  override def strandedness: Option[String] = Some("None")
+}
+
+//TODO targeted

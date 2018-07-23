@@ -25,4 +25,40 @@ import nl.biopet.utils.biowdl.PipelineSuccess
 
 trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
   addMustHaveFile(prefix + ".flagstats")
+  addMustHaveFile(prefix + ".alignment_summary_metrics")
+  addMustHaveFile(prefix + ".bait_bias_detail_metrics")
+  addMustHaveFile(prefix + ".bait_bias_summary_metrics")
+  addMustHaveFile(prefix + ".base_distribution_by_cycle_metrics")
+  addMustHaveFile(prefix + ".base_distribution_by_cycle.pdf")
+  addMustHaveFile(prefix + ".error_summary_metrics")
+  addMustHaveFile(prefix + ".gc_bias.detail_metrics")
+  addMustHaveFile(prefix + ".gc_bias.pdf")
+  addMustHaveFile(prefix + ".gc_bias.summary_metrics")
+  addMustHaveFile(prefix + ".insert_size_histogram.pdf")
+  addMustHaveFile(prefix + ".insert_size_metrics")
+  addMustHaveFile(prefix + ".pre_adapter_detail_metrics")
+  addMustHaveFile(prefix + ".pre_adapter_summary_metrics")
+  addMustHaveFile(prefix + ".quality_by_cycle_metrics")
+  addMustHaveFile(prefix + ".quality_by_cycle.pdf")
+  addMustHaveFile(prefix + ".quality_distribution_metrics")
+  addMustHaveFile(prefix + ".quality_distribution.pdf")
+  addMustHaveFile(prefix + ".quality_yield_metrics")
+
+  if (rna) {
+    addMustHaveFile(prefix + ".RNA_Metrics.pdf")
+    addMustHaveFile(prefix + ".RNA_Metrics")
+  } else {
+    addMustNotHaveFile(prefix + ".RNA_Metrics.pdf")
+    addMustNotHaveFile(prefix + ".RNA_Metrics")
+  }
+
+  if (targetIntervals.isDefined) {
+    addMustHaveFile(prefix + ".targetPcrPerTargetCoverage")
+    addMustHaveFile(prefix + ".targetPcrPerBaseCoverage")
+    addMustHaveFile(prefix + ".targetPcrMetrics")
+  } else {
+    addMustNotHaveFile(prefix + ".targetPcrPerTargetCoverage")
+    addMustNotHaveFile(prefix + ".targetPcrPerBaseCoverage")
+    addMustNotHaveFile(prefix + ".targetPcrMetrics")
+  }
 }
