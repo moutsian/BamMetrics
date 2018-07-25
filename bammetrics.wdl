@@ -61,8 +61,8 @@ workflow BamMetrics {
                 refDict = refDict,
                 refFastaIndex = refFastaIndex,
                 basename = prefix,
-                targetIntervals = targetIntervals,
-                ampliconIntervals = ampliconIntervals
+                targetIntervals = select_all(targetIntervals),
+                ampliconIntervals = select_first([ampliconIntervals])
         }
     }
 }
