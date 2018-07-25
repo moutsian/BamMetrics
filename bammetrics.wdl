@@ -45,7 +45,7 @@ workflow BamMetrics {
             input:
                 bamFile = bamFile,
                 bamIndex = bamIndex,
-                refRefflat = refRefflat,
+                refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness]
         }
