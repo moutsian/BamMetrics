@@ -1,19 +1,23 @@
+version 1.0
+
 import "tasks/picard.wdl" as picard
 import "tasks/samtools.wdl" as samtools
 
 workflow BamMetrics {
-    File bamFile
-    File bamIndex
-    String outputDir
-    File refFasta
-    File refDict
-    File refFastaIndex
+    input {
+        File bamFile
+        File bamIndex
+        String outputDir
+        File refFasta
+        File refDict
+        File refFastaIndex
 
-    File? refRefflat
-    String? strandedness = "None"
+        File? refRefflat
+        String strandedness = "None"
 
-    Array[File]+? targetIntervals
-    File? ampliconIntervals
+        Array[File]+? targetIntervals
+        File? ampliconIntervals
+    }
 
     String prefix = outputDir + "/" + basename(bamFile, ".bam")
 
