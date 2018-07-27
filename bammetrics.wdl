@@ -64,4 +64,8 @@ workflow BamMetrics {
                 ampliconIntervals = select_first([ampliconIntervals])
         }
     }
+
+    output {
+    }
+
 }
