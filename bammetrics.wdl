@@ -67,5 +67,4 @@ workflow BamMetrics {
 
     output {
     }
-
 }
