@@ -1,19 +1,23 @@
+version 1.0
+
 import "tasks/picard.wdl" as picard
 import "tasks/samtools.wdl" as samtools
 
 workflow BamMetrics {
-    File bamFile
-    File bamIndex
-    String outputDir
-    File refFasta
-    File refDict
-    File refFastaIndex
+    input {
+        File bamFile
+        File bamIndex
+        String outputDir
+        File refFasta
+        File refDict
+        File refFastaIndex
 
-    File? refRefflat
-    String? strandedness = "None"
+        File? refRefflat
+        String strandedness = "None"
 
-    Array[File]+? targetIntervals
-    File? ampliconIntervals
+        Array[File]+? targetIntervals
+        File? ampliconIntervals
+    }
 
     String prefix = outputDir + "/" + basename(bamFile, ".bam")
 
@@ -36,15 +40,14 @@ workflow BamMetrics {
     if (defined(refRefflat)) {
         Map[String, String] strandednessConversion = {"None": "NONE",
             "FR":"FIRST_READ_TRANSCRIPTION_STRAND", "RF": "SECOND_READ_TRANSCRIPTION_STRAND"}
-        String strandedness2 = select_first([strandedness, "None"])
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
                 bamFile = bamFile,
                 bamIndex = bamIndex,
-                refRefflat = refRefflat,
+                refRefflat = select_first([refRefflat]),
                 basename = prefix,
-                strandSpecificity = strandednessConversion[strandedness2]
+                strandSpecificity = strandednessConversion[strandedness]
         }
     }
 
@@ -57,8 +60,11 @@ workflow BamMetrics {
                 refDict = refDict,
                 refFastaIndex = refFastaIndex,
                 basename = prefix,
-                targetIntervals = targetIntervals,
-                ampliconIntervals = ampliconIntervals
+                targetIntervals = select_first([targetIntervals]),
+                ampliconIntervals = select_first([ampliconIntervals])
         }
+    }
+
+    output {
     }
 }
