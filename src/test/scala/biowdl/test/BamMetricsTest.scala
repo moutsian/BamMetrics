@@ -48,7 +48,7 @@ class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
   override def strandedness: Option[String] = Some("None")
 }
 
-class BamMetricsTargeteedTest extends BamMetricsTest {
+class BamMetricsTargetedTest extends BamMetricsTest {
   override def ampliconIntervals: Option[File] =
     Some(fixtureFile("reference", "target.bed"))
   override def targetIntervals: Option[List[File]] =
