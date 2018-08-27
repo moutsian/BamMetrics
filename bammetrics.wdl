@@ -52,6 +52,25 @@ workflow BamMetrics {
     }
 
     if (defined(targetIntervals)) {
+        Array[File] targetBeds = select_first([targetIntervals])
+        scatter (targetBed in targetBeds) {
+            call picard.BedToIntervalList as targetIntervalsLists {
+                input:
+                    bedFile = targetBed,
+                    outputPath =
+                        prefix + "_intervalLists/" + basename(targetBed) + ".interval_list",
+                    dict=refDict
+            }
+        }
+
+        call picard.BedToIntervalList as ampliconIntervalsLists {
+             input:
+                 bedFile = select_first([ampliconIntervals]),
+                 outputPath = prefix + "_intervalLists/" +
+                    basename(select_first([ampliconIntervals])) + ".interval_list",
+                 dict=refDict
+            }
+
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
                 bamFile = bamFile,
@@ -60,8 +79,8 @@ workflow BamMetrics {
                 refDict = refDict,
                 refFastaIndex = refFastaIndex,
                 basename = prefix,
-                targetIntervals = select_first([targetIntervals]),
-                ampliconIntervals = select_first([ampliconIntervals])
+                targetIntervals = targetIntervalsLists.intervalList,
+                ampliconIntervals = ampliconIntervalsLists.intervalList
         }
     }
 

@@ -27,6 +27,8 @@ import nl.biopet.utils.biowdl.annotations.TestAnnotation
 import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
 
+import nl.biopet.utils.ngs.intervals.{BedRecord, BedRecordList}
+
 class BamMetricsTest
     extends BamMetricsSuccess
     with TestReference
@@ -46,4 +48,10 @@ class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
   override def strandedness: Option[String] = Some("None")
 }
 
+class BamMetricsTargetedTest extends BamMetricsTest {
+  override def ampliconIntervals: Option[File] =
+    Some(fixtureFile("reference", "target.bed"))
+  override def targetIntervals: Option[List[File]] =
+    Some(List(fixtureFile("reference", "target.bed")))
+}
 //TODO targeted
