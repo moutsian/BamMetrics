@@ -47,7 +47,9 @@ trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
   addConditionalFile(rna, prefix + ".RNA_Metrics.pdf")
   addConditionalFile(rna, prefix + ".RNA_Metrics")
 
-  addConditionalFile(targetIntervals.isDefined, prefix + ".targetPcrPerTargetCoverage")
-  addConditionalFile(targetIntervals.isDefined, prefix + ".targetPcrPerBaseCoverage")
+  addConditionalFile(targetIntervals.isDefined,
+                     prefix + ".targetPcrPerTargetCoverage")
+  addConditionalFile(targetIntervals.isDefined,
+                     prefix + ".targetPcrPerBaseCoverage")
   addConditionalFile(targetIntervals.isDefined, prefix + ".targetPcrMetrics")
 }
