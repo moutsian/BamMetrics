@@ -44,21 +44,12 @@ trait BamMetricsSuccess extends BamMetrics with PipelineSuccess {
   addMustHaveFile(prefix + ".quality_distribution.pdf")
   addMustHaveFile(prefix + ".quality_yield_metrics")
 
-  if (rna) {
-    addMustHaveFile(prefix + ".RNA_Metrics.pdf")
-    addMustHaveFile(prefix + ".RNA_Metrics")
-  } else {
-    addMustNotHaveFile(prefix + ".RNA_Metrics.pdf")
-    addMustNotHaveFile(prefix + ".RNA_Metrics")
-  }
+  addConditionalFile(rna, prefix + ".RNA_Metrics.pdf")
+  addConditionalFile(rna, prefix + ".RNA_Metrics")
 
-  if (targetIntervals.isDefined) {
-    addMustHaveFile(prefix + ".targetPcrPerTargetCoverage")
-    addMustHaveFile(prefix + ".targetPcrPerBaseCoverage")
-    addMustHaveFile(prefix + ".targetPcrMetrics")
-  } else {
-    addMustNotHaveFile(prefix + ".targetPcrPerTargetCoverage")
-    addMustNotHaveFile(prefix + ".targetPcrPerBaseCoverage")
-    addMustNotHaveFile(prefix + ".targetPcrMetrics")
-  }
+  addConditionalFile(targetIntervals.isDefined,
+                     prefix + ".targetPcrPerTargetCoverage")
+  addConditionalFile(targetIntervals.isDefined,
+                     prefix + ".targetPcrPerBaseCoverage")
+  addConditionalFile(targetIntervals.isDefined, prefix + ".targetPcrMetrics")
 }
