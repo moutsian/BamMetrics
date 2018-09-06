@@ -2,6 +2,7 @@ version 1.0
 
 import "tasks/picard.wdl" as picard
 import "tasks/samtools.wdl" as samtools
+import "tasks/biopet/bamstats.wdl" as bamstats
 
 workflow BamMetrics {
     input {
@@ -25,6 +26,15 @@ workflow BamMetrics {
         input:
             inputBam = bamFile,
             outputPath = prefix + ".flagstats"
+    }
+
+    call bamstats.Generate {
+        input:
+            bam=bamFile,
+            bamIndex=bamIndex,
+            reference=refFasta,
+            outputDir=prefix + "_stats",
+            scatterMode=false
     }
 
     call picard.CollectMultipleMetrics as picardMetrics {
