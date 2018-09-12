@@ -33,6 +33,7 @@ workflow BamMetrics {
             bam=bamFile,
             bamIndex=bamIndex,
             reference=refFasta,
+            referenceDict=refDict,
             outputDir=prefix + "_stats",
             scatterMode=false
     }
