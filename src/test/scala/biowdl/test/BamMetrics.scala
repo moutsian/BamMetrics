@@ -52,11 +52,15 @@ trait BamMetrics extends Pipeline with Reference with Annotation {
     super.inputs ++
       Map(
         "BamMetrics.outputDir" -> outputDir.getAbsolutePath,
-        "BamMetrics.refFasta" -> referenceFasta.getAbsolutePath,
-        "BamMetrics.refFastaIndex" -> referenceFastaIndexFile.getAbsolutePath,
-        "BamMetrics.refDict" -> referenceFastaDictFile.getAbsolutePath,
-        "BamMetrics.bamFile" -> bamFile.getAbsolutePath,
-        "BamMetrics.bamIndex" -> bamIndexFile.getAbsolutePath
+        "BamMetrics.reference" -> Map(
+          "fasta" -> referenceFasta.getAbsolutePath,
+          "fai" -> referenceFastaIndexFile.getAbsolutePath,
+          "dict" -> referenceFastaDictFile.getAbsolutePath
+        ),
+        "BamMetrics.bam" -> Map(
+          "file" -> bamFile.getAbsolutePath,
+          "index" -> bamIndexFile.getAbsolutePath
+        )
       ) ++ {
       targetIntervals match {
         case Some(_) =>
