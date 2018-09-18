@@ -28,10 +28,8 @@ workflow BamMetrics {
 
     call bamstats.Generate {
         input:
-            bam=bam.file,
-            bamIndex=bam.index,
-            reference=reference.fasta,
-            referenceDict=reference.dict,
+            bam=bam,
+            reference=reference,
             outputDir=prefix + "_stats",
             scatterMode=false
     }
@@ -49,7 +47,7 @@ workflow BamMetrics {
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
-                bamFile = bam,
+                bamFile = bam.file,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness]
@@ -78,7 +76,7 @@ workflow BamMetrics {
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
-                bamFile = bam,
+                bamFile = bam.file,
                 reference = reference,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
