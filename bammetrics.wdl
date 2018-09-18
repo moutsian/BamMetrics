@@ -47,7 +47,7 @@ workflow BamMetrics {
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
-                bamFile = bam.file,
+                bamFile = bam,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness]
@@ -76,7 +76,7 @@ workflow BamMetrics {
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
-                bamFile = bam.file,
+                bamFile = bam,
                 reference = reference,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
