@@ -3,15 +3,13 @@ version 1.0
 import "tasks/picard.wdl" as picard
 import "tasks/samtools.wdl" as samtools
 import "tasks/biopet/bamstats.wdl" as bamstats
+import "tasks/common.wdl" as common
 
 workflow BamMetrics {
     input {
-        File bamFile
-        File bamIndex
+        IndexedBamFile bam
         String outputDir
-        File refFasta
-        File refDict
-        File refFastaIndex
+        Reference reference
 
         File? refRefflat
         String strandedness = "None"
@@ -20,32 +18,29 @@ workflow BamMetrics {
         File? ampliconIntervals
     }
 
-    String prefix = outputDir + "/" + basename(bamFile, ".bam")
+    String prefix = outputDir + "/" + basename(bam.file, ".bam")
 
     call samtools.Flagstat {
         input:
-            inputBam = bamFile,
+            inputBam = bam.file,
             outputPath = prefix + ".flagstats"
     }
 
     call bamstats.Generate {
         input:
-            bam=bamFile,
-            bamIndex=bamIndex,
-            reference=refFasta,
-            referenceDict=refDict,
+            bam=bam.file,
+            bamIndex=bam.index,
+            reference=reference.fasta,
+            referenceDict=reference.dict,
             outputDir=prefix + "_stats",
             scatterMode=false
     }
 
     call picard.CollectMultipleMetrics as picardMetrics {
         input:
-            bamFile = bamFile,
-            bamIndex = bamIndex,
+            bamFile = bam,
             basename = prefix,
-            refFasta = refFasta,
-            refDict = refDict,
-            refFastaIndex = refFastaIndex
+            reference = reference
     }
 
     if (defined(refRefflat)) {
@@ -54,8 +49,7 @@ workflow BamMetrics {
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
-                bamFile = bamFile,
-                bamIndex = bamIndex,
+                bamFile = bam,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness]
@@ -70,7 +64,7 @@ workflow BamMetrics {
                     bedFile = targetBed,
                     outputPath =
                         prefix + "_intervalLists/" + basename(targetBed) + ".interval_list",
-                    dict=refDict
+                    dict = reference.dict
             }
         }
 
@@ -79,16 +73,13 @@ workflow BamMetrics {
                  bedFile = select_first([ampliconIntervals]),
                  outputPath = prefix + "_intervalLists/" +
                     basename(select_first([ampliconIntervals])) + ".interval_list",
-                 dict=refDict
+                 dict = reference.dict
             }
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
-                bamFile = bamFile,
-                bamIndex = bamIndex,
-                refFasta = refFasta,
-                refDict = refDict,
-                refFastaIndex = refFastaIndex,
+                bamFile = bam,
+                reference = reference,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
                 ampliconIntervals = ampliconIntervalsLists.intervalList
