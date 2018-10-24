@@ -50,8 +50,8 @@ class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
 
 class BamMetricsTargetedTest extends BamMetricsTest {
   override def ampliconIntervals: Option[File] =
-    Some(fixtureFile("reference", "target.bed"))
+    Some(fixtureFile("references", "test", "target.bed"))
   override def targetIntervals: Option[List[File]] =
-    Some(List(fixtureFile("reference", "target.bed")))
+    Some(List(fixtureFile("references", "test", "target.bed")))
 }
 //TODO targeted
