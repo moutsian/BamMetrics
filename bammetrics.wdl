@@ -1,10 +1,9 @@
 version 1.0
 
-import "tasks/picard.wdl" as picard
-import "tasks/samtools.wdl" as samtools
 import "tasks/biopet/bamstats.wdl" as bamstats
 import "tasks/common.wdl" as common
-import "tasks/biopet/bamstats.wdl" as bamstats
+import "tasks/picard.wdl" as picard
+import "tasks/samtools.wdl" as samtools
 
 workflow BamMetrics {
     input {
