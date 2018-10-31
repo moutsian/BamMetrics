@@ -24,10 +24,8 @@ package biowdl.test
 import java.io.File
 
 import nl.biopet.utils.biowdl.annotations.TestAnnotation
-import nl.biopet.utils.biowdl.references.TestReference
 import nl.biopet.utils.biowdl.fixtureFile
-
-import nl.biopet.utils.ngs.intervals.{BedRecord, BedRecordList}
+import nl.biopet.utils.biowdl.references.TestReference
 
 class BamMetricsTest
     extends BamMetricsSuccess
@@ -50,8 +48,8 @@ class BamMetricsRnaStrandednessTest extends BamMetricsRnaTest {
 
 class BamMetricsTargetedTest extends BamMetricsTest {
   override def ampliconIntervals: Option[File] =
-    Some(fixtureFile("reference", "target.bed"))
+    Some(fixtureFile("references", "test", "reference", "target.bed"))
   override def targetIntervals: Option[List[File]] =
-    Some(List(fixtureFile("reference", "target.bed")))
+    Some(List(fixtureFile("references", "test", "reference", "target.bed")))
 }
 //TODO targeted
