@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Home
-version: v0.1
-latest: true
+version: develop
+latest: false
 ---
 
 This workflow can be used to collect a variety of metrics from a BAM file.
