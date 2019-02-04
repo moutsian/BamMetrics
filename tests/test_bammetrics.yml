@@ -105,7 +105,7 @@
     - path: "test-output/rna3.insert_size_metrics"
     - path: "test-output/rna3.insert_size_metrics"
     - path: "test-output/rna3.pre_adapter_summary_metrics"
-    - path: "test-output/wgs1.pre_adapter_detail_metrics"
+    - path: "test-output/rna3.pre_adapter_detail_metrics"
     - path: "test-output/rna3.quality_by_cycle_metrics"
     - path: "test-output/rna3.quality_by_cycle.pdf"
     - path: "test-output/rna3.quality_distribution_metrics"
