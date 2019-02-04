@@ -4,8 +4,8 @@
   command: >-
     bash -c '
     TEST_JSON=tests/integration/dna.json ;
-    sed -i "2i\"QC.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON QC.wdl'
+    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
+    cromwell run -i $TEST_JSON bammetrics.wdl'
   stdout:
     contains:
       - "WorkflowSucceededState"
@@ -16,8 +16,8 @@
   command: >-
     bash -c '
     TEST_JSON=tests/integration/dna_targeted.json ;
-    sed -i "2i\"QC.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON QC.wdl'
+    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
+    cromwell run -i $TEST_JSON bammetrics.wdl'
   stdout:
     contains:
       - "WorkflowSucceededState"
@@ -28,8 +28,8 @@
   command: >-
     bash -c '
     TEST_JSON=tests/integration/rna.json ;
-    sed -i "2i\"QC.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON QC.wdl'
+    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
+    cromwell run -i $TEST_JSON bammetrics.wdl'
   stdout:
     contains:
       - "WorkflowSucceededState"
