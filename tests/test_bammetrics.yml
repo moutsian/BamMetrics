@@ -33,16 +33,3 @@
   stdout:
     contains:
       - "WorkflowSucceededState"
-
-- name: rna_strandedness
-  tags:
-    - integration
-  command: >-
-    bash -c '
-    TEST_JSON=tests/integration/rna_strandedness.json ;
-    sed -i "2i\"QC.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON QC.wdl'
-  stdout:
-    contains:
-      - "WorkflowSucceededState"
-

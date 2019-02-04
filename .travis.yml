@@ -31,7 +31,6 @@ matrix:
   include:
     - env: TEST=dna
     - env: TEST=rna
-    - env: TEST=rna_strandedness
     - env: TEST=dna_targeted
     # Below is for testing if all files are valid and if all submodules are up to date.
     - env: TEST=Womtool validate and submodule up to date
