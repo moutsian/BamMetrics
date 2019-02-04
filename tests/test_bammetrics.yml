@@ -1,35 +1,28 @@
 - name: dna
-  tags:
-    - integration
+  tags: ["integration"]
   command: >-
     bash -c '
     TEST_JSON=tests/integration/dna.json ;
     sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
     cromwell run -i $TEST_JSON bammetrics.wdl'
-  stdout:
+  stdout: &cromwell_stdout_succes
     contains:
       - "WorkflowSucceededState"
 
 - name: dna_targeted
-  tags:
-    - integration
+  tags: ["integration"]
   command: >-
     bash -c '
     TEST_JSON=tests/integration/dna_targeted.json ;
     sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
     cromwell run -i $TEST_JSON bammetrics.wdl'
-  stdout:
-    contains:
-      - "WorkflowSucceededState"
+  stdout: *cromwell_stdout_succes
 
 - name: rna
-  tags:
-    - integration
+  tags: ["integration"]
   command: >-
     bash -c '
     TEST_JSON=tests/integration/rna.json ;
     sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
     cromwell run -i $TEST_JSON bammetrics.wdl'
-  stdout:
-    contains:
-      - "WorkflowSucceededState"
+  stdout: *cromwell_stdout_succes
