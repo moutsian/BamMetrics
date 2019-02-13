@@ -1,0 +1,13 @@
+{
+  "BamMetrics.bam": {
+    "file": "tests/data/rna3.bam",
+    "index": "tests/data/rna3.bai"
+  },
+  "BamMetrics.reference": {
+    "fasta": "tests/data/reference.fasta",
+    "fai": "tests/data/reference.fasta.fai",
+    "dict": "tests/data/reference.dict"
+  },
+  "BamMetrics.strandedness": "None",
+  "BamMetrics.refRefflat": "tests/data/reference.refflat"
+}

@@ -1,0 +1,11 @@
+{
+  "BamMetrics.bam": {
+    "file": "tests/data/wgs1.bam",
+    "index": "tests/data/wgs1.bai"
+  },
+  "BamMetrics.reference": {
+    "fasta": "tests/data/reference.fasta",
+    "fai": "tests/data/reference.fasta.fai",
+    "dict": "tests/data/reference.dict"
+  }
+}
