@@ -26,14 +26,6 @@ workflow BamMetrics {
             outputPath = prefix + ".flagstats"
     }
 
-    call bamstats.Generate {
-        input:
-            bam = bam,
-            outputDir = prefix + ".bamstats",
-            reference = reference,
-            tsvOutputs = true
-    }
-
     call picard.CollectMultipleMetrics as picardMetrics {
         input:
             bamFile = bam,
