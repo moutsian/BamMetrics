@@ -18,7 +18,8 @@ workflow BamMetrics {
 
         Map[String, String] dockerTags = {
           "samtools":"1.8--h46bd0b3_5",
-          "picard":"2.18.26--0"
+          "picard":"2.18.26--0",
+          "picard+r":"8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0"
         }
     }
 
@@ -36,7 +37,7 @@ workflow BamMetrics {
             bamFile = bam,
             basename = prefix,
             reference = reference,
-            dockerTag = dockerTags["picard"]
+            dockerTag = dockerTags["picard+r"]
     }
 
     if (defined(refRefflat)) {
@@ -49,7 +50,7 @@ workflow BamMetrics {
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness],
-                dockerTag = dockerTags["picard"]
+                dockerTag = dockerTags["picard+r"]
         }
     }
 
