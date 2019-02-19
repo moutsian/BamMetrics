@@ -30,8 +30,6 @@
     - path: "test-output/wgs1.quality_distribution_metrics"
     - path: "test-output/wgs1.quality_distribution.pdf"
     - path: "test-output/wgs1.quality_yield_metrics"
-    - path: "test-output/wgs1.bamstats/bamstats.json"
-    - path: "test-output/wgs1.bamstats/bamstats.summary.json"
 
     # These files should not be created by default
     - path: "test-output/wgs1.targetPcrPerTargetCoverage"
@@ -75,8 +73,6 @@
     - path: "test-output/wgs1.quality_distribution_metrics"
     - path: "test-output/wgs1.quality_distribution.pdf"
     - path: "test-output/wgs1.quality_yield_metrics"
-    - path: "test-output/wgs1.bamstats/bamstats.json"
-    - path: "test-output/wgs1.bamstats/bamstats.summary.json"
     - path: "test-output/wgs1.targetPcrPerTargetCoverage"
     - path: "test-output/wgs1.targetPcrPerBaseCoverage"
     - path: "test-output/wgs1.targetPcrMetrics"
@@ -111,7 +107,5 @@
     - path: "test-output/rna3.quality_distribution_metrics"
     - path: "test-output/rna3.quality_distribution.pdf"
     - path: "test-output/rna3.quality_yield_metrics"
-    - path: "test-output/rna3.bamstats/bamstats.json"
-    - path: "test-output/rna3.bamstats/bamstats.summary.json"
     - path: "test-output/rna3.RNA_Metrics.pdf"
     - path: "test-output/rna3.RNA_Metrics"
