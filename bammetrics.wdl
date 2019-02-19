@@ -17,7 +17,8 @@ workflow BamMetrics {
         File? ampliconIntervals
 
         Map[String, String] dockerTags = {
-          "samtools":"1.8--h46bd0b3_5"
+          "samtools":"1.8--h46bd0b3_5",
+          "picard":"2.18.26--0"
         }
     }
 
