@@ -1,6 +1,5 @@
 version 1.0
 
-import "tasks/biopet/bamstats.wdl" as bamstats
 import "tasks/common.wdl" as common
 import "tasks/picard.wdl" as picard
 import "tasks/samtools.wdl" as samtools
@@ -16,6 +15,12 @@ workflow BamMetrics {
 
         Array[File]+? targetIntervals
         File? ampliconIntervals
+
+        Map[String, String] dockerTags = {
+          "samtools":"1.8--h46bd0b3_5",
+          "picard":"2.18.26--0",
+          "picard+r":"8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0"
+        }
     }
 
     String prefix = outputDir + "/" + basename(bam.file, ".bam")
@@ -23,22 +28,16 @@ workflow BamMetrics {
     call samtools.Flagstat {
         input:
             inputBam = bam.file,
-            outputPath = prefix + ".flagstats"
-    }
-
-    call bamstats.Generate {
-        input:
-            bam = bam,
-            outputDir = prefix + ".bamstats",
-            reference = reference,
-            tsvOutputs = true
+            outputPath = prefix + ".flagstats",
+            dockerTag = dockerTags["samtools"]
     }
 
     call picard.CollectMultipleMetrics as picardMetrics {
         input:
             bamFile = bam,
             basename = prefix,
-            reference = reference
+            reference = reference,
+            dockerTag = dockerTags["picard+r"]
     }
 
     if (defined(refRefflat)) {
@@ -50,7 +49,8 @@ workflow BamMetrics {
                 bamFile = bam,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
-                strandSpecificity = strandednessConversion[strandedness]
+                strandSpecificity = strandednessConversion[strandedness],
+                dockerTag = dockerTags["picard+r"]
         }
     }
 
@@ -62,7 +62,8 @@ workflow BamMetrics {
                     bedFile = targetBed,
                     outputPath =
                         prefix + "_intervalLists/" + basename(targetBed) + ".interval_list",
-                    dict = reference.dict
+                    dict = reference.dict,
+                    dockerTag = dockerTags["picard"]
             }
         }
 
@@ -71,7 +72,8 @@ workflow BamMetrics {
                  bedFile = select_first([ampliconIntervals]),
                  outputPath = prefix + "_intervalLists/" +
                     basename(select_first([ampliconIntervals])) + ".interval_list",
-                 dict = reference.dict
+                 dict = reference.dict,
+                 dockerTag = dockerTags["picard"]
             }
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
@@ -80,7 +82,8 @@ workflow BamMetrics {
                 reference = reference,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
-                ampliconIntervals = ampliconIntervalsLists.intervalList
+                ampliconIntervals = ampliconIntervalsLists.intervalList,
+                dockerTag = dockerTags["picard"]
         }
     }
 
