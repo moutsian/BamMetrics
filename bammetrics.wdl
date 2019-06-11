@@ -25,7 +25,7 @@ workflow BamMetrics {
 
     String prefix = outputDir + "/" + basename(bam.file, ".bam")
 
-    call samtools.Flagstat {
+    call samtools.Flagstat as Flagstat {
         input:
             inputBam = bam.file,
             outputPath = prefix + ".flagstats",
@@ -34,9 +34,12 @@ workflow BamMetrics {
 
     call picard.CollectMultipleMetrics as picardMetrics {
         input:
-            bamFile = bam,
+            inputBam = bam.file,
+            inputBamIndex = bam.index,
             basename = prefix,
-            reference = reference,
+            referenceFasta = reference.fasta,
+            referenceFastaDict = reference.dict,
+            referenceFastaFai = reference.fai,
             dockerTag = dockerTags["picard+r"]
     }
 
@@ -46,7 +49,8 @@ workflow BamMetrics {
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
-                bamFile = bam,
+                inputBam = bam.file,
+                inputBamIndex = bam.index,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness],
@@ -78,8 +82,11 @@ workflow BamMetrics {
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
-                bamFile = bam,
-                reference = reference,
+                inputBam = bam.file,
+                inputBamIndex = bam.index,
+                referenceFasta = reference.fasta,
+                referenceFastaDict = reference.dict,
+                referenceFastaFai = reference.fai,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
                 ampliconIntervals = ampliconIntervalsLists.intervalList,
@@ -88,5 +95,7 @@ workflow BamMetrics {
     }
 
     output {
+        File flagstats = Flagstat.flagstat
+        Array[File] picardMetricsFiles = picardMetrics.allStats
     }
 }
