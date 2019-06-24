@@ -7,7 +7,7 @@ import "tasks/samtools.wdl" as samtools
 workflow BamMetrics {
     input {
         IndexedBamFile bam
-        String outputDir
+        String outputDir = "."
         Reference reference
 
         File? refRefflat
@@ -17,7 +17,7 @@ workflow BamMetrics {
         File? ampliconIntervals
 
         Map[String, String] dockerImages = {
-          "samtools":"1.8--h46bd0b3_5",
+          "samtools":"quay.io/biocontainers/samtools:1.8--h46bd0b3_5",
           "picard":"quay.io/biocontainers/picard:2.18.26--0",
           # https://raw.githubusercontent.com/BioContainers/multi-package-containers/80886dfea00f3cd9e7ae2edf4fc42816a10e5403/combinations/mulled-v2-23d9f7c700e78129a769e78521eb86d6b8341923%3A8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0.tsv
           # Contains r-base=3.4.1,picard=2.18.2
