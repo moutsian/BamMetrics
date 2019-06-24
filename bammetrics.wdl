@@ -99,5 +99,8 @@ workflow BamMetrics {
     output {
         File flagstats = Flagstat.flagstat
         Array[File] picardMetricsFiles = picardMetrics.allStats
+        Array[File] rnaMetrics = select_all([rnaSeqMetrics.metrics, rnaSeqMetrics.chart])
+        Array[File] targetedPcrMetrics = select_all([targetMetrics.perTargetCoverage, targetMetrics.perBaseCoverage, targetMetrics.metrics])
+
     }
 }
