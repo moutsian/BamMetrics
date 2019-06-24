@@ -16,10 +16,12 @@ workflow BamMetrics {
         Array[File]+? targetIntervals
         File? ampliconIntervals
 
-        Map[String, String] dockerTags = {
+        Map[String, String] dockerImages = {
           "samtools":"1.8--h46bd0b3_5",
-          "picard":"2.18.26--0",
-          "picard+r":"8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0"
+          "picard":"quay.io/biocontainers/picard:2.18.26--0",
+          # https://raw.githubusercontent.com/BioContainers/multi-package-containers/80886dfea00f3cd9e7ae2edf4fc42816a10e5403/combinations/mulled-v2-23d9f7c700e78129a769e78521eb86d6b8341923%3A8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0.tsv
+          # Contains r-base=3.4.1,picard=2.18.2
+          "picard+r":"quay.io/biocontainers/mulled-v2-23d9f7c700e78129a769e78521eb86d6b8341923:8dde04faba6c9ac93fae7e846af3bafd2c331b3b-0"
         }
     }
 
@@ -29,7 +31,7 @@ workflow BamMetrics {
         input:
             inputBam = bam.file,
             outputPath = prefix + ".flagstats",
-            dockerTag = dockerTags["samtools"]
+            dockerImage = dockerImages["samtools"]
     }
 
     call picard.CollectMultipleMetrics as picardMetrics {
@@ -40,7 +42,7 @@ workflow BamMetrics {
             referenceFasta = reference.fasta,
             referenceFastaDict = reference.dict,
             referenceFastaFai = reference.fai,
-            dockerTag = dockerTags["picard+r"]
+            dockerImage = dockerImages["picard+r"]
     }
 
     if (defined(refRefflat)) {
@@ -54,7 +56,7 @@ workflow BamMetrics {
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness],
-                dockerTag = dockerTags["picard+r"]
+                dockerImage = dockerImages["picard+r"]
         }
     }
 
@@ -67,7 +69,7 @@ workflow BamMetrics {
                     outputPath =
                         prefix + "_intervalLists/" + basename(targetBed) + ".interval_list",
                     dict = reference.dict,
-                    dockerTag = dockerTags["picard"]
+                    dockerImage = dockerImages["picard"]
             }
         }
 
@@ -77,7 +79,7 @@ workflow BamMetrics {
                  outputPath = prefix + "_intervalLists/" +
                     basename(select_first([ampliconIntervals])) + ".interval_list",
                  dict = reference.dict,
-                 dockerTag = dockerTags["picard"]
+                 dockerImage = dockerImages["picard"]
             }
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
@@ -90,7 +92,7 @@ workflow BamMetrics {
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
                 ampliconIntervals = ampliconIntervalsLists.intervalList,
-                dockerTag = dockerTags["picard"]
+                dockerImage = dockerImages["picard"]
         }
     }
 
