@@ -2,10 +2,8 @@
   tags:
     - integration
   command: >-
-    bash -c '
-    TEST_JSON=tests/integration/dna.json ;
-    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON bammetrics.wdl'
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/dna.json bammetrics.wdl
   stdout: &cromwell_stdout_succes
     contains:
       - "WorkflowSucceededState"
@@ -47,10 +45,8 @@
   tags:
     - integration
   command: >-
-    bash -c '
-    TEST_JSON=tests/integration/dna_targeted.json ;
-    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON bammetrics.wdl'
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/dna_targeted.json bammetrics.wdl
   stdout: *cromwell_stdout_succes
   files:
     - path: "test-output/wgs1.flagstats"
@@ -81,10 +77,8 @@
   tags:
     - integration
   command: >-
-    bash -c '
-    TEST_JSON=tests/integration/rna.json ;
-    sed -i "2i\"BamMetrics.outputDir\":\"$PWD/test-output\"," $TEST_JSON ;
-    cromwell run -i $TEST_JSON bammetrics.wdl'
+    cromwell run -o tests/cromwell_options.json
+    -i tests/integration/rna.json  bammetrics.wdl
   stdout: *cromwell_stdout_succes
   files:
     - path: "test-output/rna3.flagstats"
