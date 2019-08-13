@@ -56,7 +56,7 @@ providing these inputs additional targeted PCR metrics will be collected.
   "BamMetrics.targetIntervals": "A list of paths to the bed files containing the target regions",
   "BamMetrics.ampliconIntervals": "The path to the bed file containing the amplicon regions"
 }
-
+```
 An output directory can be set using an `options.json` file. See [the
 cromwell documentation](
 https://cromwell.readthedocs.io/en/stable/wf_options/Overview/) for more
