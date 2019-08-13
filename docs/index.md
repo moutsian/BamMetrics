@@ -33,7 +33,6 @@ about pipeline inputs.
     "fai": "The path to the index for the reference fasta",
     "dict": "The path to the dict file for the reference fasta"
   },
-  "BamMetrics.outputDir": "The path to the output directory",
   "BamMetrics.bam": {
     "file": "A path to an input BAM file",
     "index": "The path to the index for the ipnut BAM file"
@@ -57,6 +56,25 @@ providing these inputs additional targeted PCR metrics will be collected.
   "BamMetrics.targetIntervals": "A list of paths to the bed files containing the target regions",
   "BamMetrics.ampliconIntervals": "The path to the bed file containing the amplicon regions"
 }
+
+An output directory can be set using an `options.json` file. See [the
+cromwell documentation](
+https://cromwell.readthedocs.io/en/stable/wf_options/Overview/) for more
+information.
+
+Example `options.json` file:
+```JSON
+{
+"final_workflow_outputs_dir": "my-analysis-output",
+"use_relative_output_paths": true,
+"default_runtime_attributes": {
+  "docker_user": "$EUID"
+  }
+}
+```
+Alternatively an output directory can be set with `BamMetrics.outputDir`.
+`BamMetrics.outputDir` must be mounted in the docker container. Cromwell will
+need a custom configuration to allow this.
 ```
 
 #### Example
@@ -80,10 +98,18 @@ providing these inputs additional targeted PCR metrics will be collected.
 }
 ```
 
-### Dependency requirements and tool versions
-Included in the repository is an `environment.yml` file. This file includes
-all the tool version on which the workflow was tested. You can use conda and
-this file to create an environment with all the correct tools.
+## Dependency requirements and tool versions
+Biowdl pipelines use docker images to ensure  reproducibility. This
+means that biowdl pipelines will run on any system that has docker
+installed. Alternatively they can be run with singularity.
+
+For more advanced configuration of docker or singularity please check
+the [cromwell documentation on containers](
+https://cromwell.readthedocs.io/en/stable/tutorials/Containers/).
+
+Images from [biocontainers](https://biocontainers.pro) are preferred for
+biowdl pipelines. The list of default images for this pipeline can be
+found in the default for the `dockerImages` input.
 
 ### Output
 A directory containing the various metrics collected.
