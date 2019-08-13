@@ -75,7 +75,6 @@ Example `options.json` file:
 Alternatively an output directory can be set with `BamMetrics.outputDir`.
 `BamMetrics.outputDir` must be mounted in the docker container. Cromwell will
 need a custom configuration to allow this.
-```
 
 #### Example
 ```json
