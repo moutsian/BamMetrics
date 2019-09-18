@@ -1,15 +1,13 @@
 ---
 layout: default
 title: Home
-version: develop
-latest: false
 ---
 
 This workflow can be used to collect a variety of metrics from a BAM file.
 Metrics are collected using picard and samtools.
 
 This workflow is part of [BioWDL](https://biowdl.github.io/)
-developed by [the SASC team](http://sasc.lumc.nl/).
+developed by the SASC team at [Leiden University Medical Center](https://www.lumc.nl/).
 
 ## Usage
 This workflow can be run using
@@ -23,8 +21,6 @@ Inputs are provided through a JSON file. The minimally required inputs are
 described below and a template containing all possible inputs can be generated
 using Womtool as described in the
 [WOMtool documentation](http://cromwell.readthedocs.io/en/stable/WOMtool/).
-See [this page](/inputs.html) for some additional general notes and information
-about pipeline inputs.
 
 ```json
 {
@@ -33,7 +29,6 @@ about pipeline inputs.
     "fai": "The path to the index for the reference fasta",
     "dict": "The path to the dict file for the reference fasta"
   },
-  "BamMetrics.outputDir": "The path to the output directory",
   "BamMetrics.bam": {
     "file": "A path to an input BAM file",
     "index": "The path to the index for the ipnut BAM file"
@@ -58,6 +53,24 @@ providing these inputs additional targeted PCR metrics will be collected.
   "BamMetrics.ampliconIntervals": "The path to the bed file containing the amplicon regions"
 }
 ```
+An output directory can be set using an `options.json` file. See [the
+cromwell documentation](
+https://cromwell.readthedocs.io/en/stable/wf_options/Overview/) for more
+information.
+
+Example `options.json` file:
+```JSON
+{
+"final_workflow_outputs_dir": "my-analysis-output",
+"use_relative_output_paths": true,
+"default_runtime_attributes": {
+  "docker_user": "$EUID"
+  }
+}
+```
+Alternatively an output directory can be set with `BamMetrics.outputDir`.
+`BamMetrics.outputDir` must be mounted in the docker container. Cromwell will
+need a custom configuration to allow this.
 
 #### Example
 ```json
@@ -80,10 +93,18 @@ providing these inputs additional targeted PCR metrics will be collected.
 }
 ```
 
-### Dependency requirements and tool versions
-Included in the repository is an `environment.yml` file. This file includes
-all the tool version on which the workflow was tested. You can use conda and
-this file to create an environment with all the correct tools.
+## Dependency requirements and tool versions
+Biowdl pipelines use docker images to ensure  reproducibility. This
+means that biowdl pipelines will run on any system that has docker
+installed. Alternatively they can be run with singularity.
+
+For more advanced configuration of docker or singularity please check
+the [cromwell documentation on containers](
+https://cromwell.readthedocs.io/en/stable/tutorials/Containers/).
+
+Images from [biocontainers](https://biocontainers.pro) are preferred for
+biowdl pipelines. The list of default images for this pipeline can be
+found in the default for the `dockerImages` input.
 
 ### Output
 A directory containing the various metrics collected.
@@ -95,6 +116,8 @@ For any questions about running this workflow and feature requests, please use
 the
 <a href='https://github.com/biowdl/bammetrics/issues'>github issue tracker</a>
 or contact
-<a href='http://sasc.lumc.nl/'>the SASC team</a> directly at: <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;'>
+the SASC team
+ directly at: 
+<a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;'>
 &#115;&#97;&#115;&#99;&#64;&#108;&#117;&#109;&#99;&#46;&#110;&#108;</a>.
 </p>
