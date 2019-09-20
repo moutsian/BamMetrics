@@ -9,7 +9,7 @@ This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
 
-version 1.0.0-dev
+version 1.0.0
 ---------------------------
 + Update documentation to reflect latest changes
 + Picard: Use version 2.20.5 of the biocontainer as this includes the R dependency
