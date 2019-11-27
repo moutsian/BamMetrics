@@ -36,7 +36,7 @@ matrix:
     - env: TEST=dna
     - env: TEST=rna
     - env: TEST=dna_targeted
-    - env: TEST=lint
+    - env: TEST="Womtool validate and submodule up to date"
       stage: lint
       install:
         - conda install cromwell
