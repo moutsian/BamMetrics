@@ -105,7 +105,7 @@ workflow BamMetrics {
         outputDir: {description: "The directory to which the outputs will be written.", category: "common"}
         reference: {description: "The reference files: a fasta, its index and sequence dictionary.", category: "required"}
         refRefflat: {description: "A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.", category: "common"}
-        strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript)",
+        strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript).",
                        category: "common"}
         targetIntervals: {description: "An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.",
                           category: "common"}
