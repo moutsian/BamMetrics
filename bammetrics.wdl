@@ -6,10 +6,12 @@ import "tasks/samtools.wdl" as samtools
 
 workflow BamMetrics {
     input {
-        IndexedBamFile bam
+        File bam
+        File bamIndex
         String outputDir = "."
-        Reference reference
-
+        File referenceFasta
+        File referenceFastaFai
+        File referenceFastaDict
         File? refRefflat
         String strandedness = "None"
 
@@ -22,23 +24,23 @@ workflow BamMetrics {
         }
     }
 
-    String prefix = outputDir + "/" + basename(bam.file, ".bam")
+    String prefix = outputDir + "/" + basename(bam, ".bam")
 
     call samtools.Flagstat as Flagstat {
         input:
-            inputBam = bam.file,
+            inputBam = bam,
             outputPath = prefix + ".flagstats",
             dockerImage = dockerImages["samtools"]
     }
 
     call picard.CollectMultipleMetrics as picardMetrics {
         input:
-            inputBam = bam.file,
-            inputBamIndex = bam.index,
+            inputBam = bam,
+            inputBamIndex = bamIndex,
             basename = prefix,
-            referenceFasta = reference.fasta,
-            referenceFastaDict = reference.dict,
-            referenceFastaFai = reference.fai,
+            referenceFasta = referenceFasta,
+            referenceFastaDict = referenceFastaDict,
+            referenceFastaFai = referenceFastaFai,
             dockerImage = dockerImages["picard"]
     }
 
@@ -48,8 +50,8 @@ workflow BamMetrics {
 
         call picard.CollectRnaSeqMetrics as rnaSeqMetrics {
             input:
-                inputBam = bam.file,
-                inputBamIndex = bam.index,
+                inputBam = bam,
+                inputBamIndex = bamIndex,
                 refRefflat = select_first([refRefflat]),
                 basename = prefix,
                 strandSpecificity = strandednessConversion[strandedness],
@@ -65,7 +67,7 @@ workflow BamMetrics {
                     bedFile = targetBed,
                     outputPath =
                         prefix + "_intervalLists/" + basename(targetBed) + ".interval_list",
-                    dict = reference.dict,
+                    dict = referenceFastaDict,
                     dockerImage = dockerImages["picard"]
             }
         }
@@ -75,17 +77,17 @@ workflow BamMetrics {
                  bedFile = select_first([ampliconIntervals]),
                  outputPath = prefix + "_intervalLists/" +
                     basename(select_first([ampliconIntervals])) + ".interval_list",
-                 dict = reference.dict,
+                 dict = referenceFastaDict,
                  dockerImage = dockerImages["picard"]
             }
 
         call picard.CollectTargetedPcrMetrics as targetMetrics {
             input:
-                inputBam = bam.file,
-                inputBamIndex = bam.index,
-                referenceFasta = reference.fasta,
-                referenceFastaDict = reference.dict,
-                referenceFastaFai = reference.fai,
+                inputBam = bam,
+                inputBamIndex = bamIndex,
+                referenceFasta = referenceFasta,
+                referenceFastaDict = referenceFastaDict,
+                referenceFastaFai = referenceFastaFai,
                 basename = prefix,
                 targetIntervals = targetIntervalsLists.intervalList,
                 ampliconIntervals = ampliconIntervalsLists.intervalList,
