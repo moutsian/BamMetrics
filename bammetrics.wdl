@@ -103,9 +103,12 @@ workflow BamMetrics {
     }
 
     parameter_meta {
-        bam: {description: "The BAM file and its index for which metrics will be collected.", category: "required"}
+        bam: {description: "The BAM file for which metrics will be collected.", category: "required"}
+        bamIndex: {description: "The index for the bam file.", category: "required"}
         outputDir: {description: "The directory to which the outputs will be written.", category: "common"}
-        reference: {description: "The reference files: a fasta, its index and sequence dictionary.", category: "required"}
+        referenceFasta: {description: "The reference fasta file.", category: "required"}
+        referenceFastaDict: {description: "The sequence dictionary associated with the reference fasta file.", category: "required"}
+        referenceFastaFai: {description: "The index for the reference fasta file.", category: "required"}
         refRefflat: {description: "A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.", category: "common"}
         strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript).",
                        category: "common"}
