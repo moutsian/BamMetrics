@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Inputs
+title: "Inputs: BamMetrics"
 ---
 
 # Inputs for BamMetrics
@@ -13,13 +13,28 @@ BamMetrics.
 <dl>
 <dt id="BamMetrics.bam"><a href="#BamMetrics.bam">BamMetrics.bam</a></dt>
 <dd>
-    <i>struct(file : File, index : File, md5sum : String?) </i><br />
-    The BAM file and its index for which metrics will be collected.
+    <i>File </i><br />
+    The BAM file for which metrics will be collected.
 </dd>
-<dt id="BamMetrics.reference"><a href="#BamMetrics.reference">BamMetrics.reference</a></dt>
+<dt id="BamMetrics.bamIndex"><a href="#BamMetrics.bamIndex">BamMetrics.bamIndex</a></dt>
 <dd>
-    <i>struct(dict : File, fai : File, fasta : File) </i><br />
-    The reference files: a fasta, its index and sequence dictionary.
+    <i>File </i><br />
+    The index for the bam file.
+</dd>
+<dt id="BamMetrics.referenceFasta"><a href="#BamMetrics.referenceFasta">BamMetrics.referenceFasta</a></dt>
+<dd>
+    <i>File </i><br />
+    The reference fasta file.
+</dd>
+<dt id="BamMetrics.referenceFastaDict"><a href="#BamMetrics.referenceFastaDict">BamMetrics.referenceFastaDict</a></dt>
+<dd>
+    <i>File </i><br />
+    The sequence dictionary associated with the reference fasta file.
+</dd>
+<dt id="BamMetrics.referenceFastaFai"><a href="#BamMetrics.referenceFastaFai">BamMetrics.referenceFastaFai</a></dt>
+<dd>
+    <i>File </i><br />
+    The index for the reference fasta file.
 </dd>
 </dl>
 
@@ -59,7 +74,7 @@ BamMetrics.
 <dt id="BamMetrics.ampliconIntervalsLists.javaXmx"><a href="#BamMetrics.ampliconIntervalsLists.javaXmx">BamMetrics.ampliconIntervalsLists.javaXmx</a></dt>
 <dd>
     <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
-    The maximum memory available to the program. (Should be lower than `memory` to accommodate JVM overhead.
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
 </dd>
 <dt id="BamMetrics.ampliconIntervalsLists.memory"><a href="#BamMetrics.ampliconIntervalsLists.memory">BamMetrics.ampliconIntervalsLists.memory</a></dt>
 <dd>
@@ -104,7 +119,7 @@ BamMetrics.
 <dt id="BamMetrics.picardMetrics.javaXmx"><a href="#BamMetrics.picardMetrics.javaXmx">BamMetrics.picardMetrics.javaXmx</a></dt>
 <dd>
     <i>String </i><i>&mdash; Default:</i> <code>"8G"</code><br />
-    The maximum memory available to the program. (Should be lower than `memory` to accommodate JVM overhead.
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
 </dd>
 <dt id="BamMetrics.picardMetrics.meanQualityByCycle"><a href="#BamMetrics.picardMetrics.meanQualityByCycle">BamMetrics.picardMetrics.meanQualityByCycle</a></dt>
 <dd>
@@ -124,7 +139,7 @@ BamMetrics.
 <dt id="BamMetrics.rnaSeqMetrics.javaXmx"><a href="#BamMetrics.rnaSeqMetrics.javaXmx">BamMetrics.rnaSeqMetrics.javaXmx</a></dt>
 <dd>
     <i>String </i><i>&mdash; Default:</i> <code>"8G"</code><br />
-    The maximum memory available to the program. (Should be lower than `memory` to accommodate JVM overhead.
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
 </dd>
 <dt id="BamMetrics.rnaSeqMetrics.memory"><a href="#BamMetrics.rnaSeqMetrics.memory">BamMetrics.rnaSeqMetrics.memory</a></dt>
 <dd>
@@ -134,7 +149,7 @@ BamMetrics.
 <dt id="BamMetrics.targetIntervalsLists.javaXmx"><a href="#BamMetrics.targetIntervalsLists.javaXmx">BamMetrics.targetIntervalsLists.javaXmx</a></dt>
 <dd>
     <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
-    The maximum memory available to the program. (Should be lower than `memory` to accommodate JVM overhead.
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
 </dd>
 <dt id="BamMetrics.targetIntervalsLists.memory"><a href="#BamMetrics.targetIntervalsLists.memory">BamMetrics.targetIntervalsLists.memory</a></dt>
 <dd>
@@ -144,7 +159,7 @@ BamMetrics.
 <dt id="BamMetrics.targetMetrics.javaXmx"><a href="#BamMetrics.targetMetrics.javaXmx">BamMetrics.targetMetrics.javaXmx</a></dt>
 <dd>
     <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
-    The maximum memory available to the program. (Should be lower than `memory` to accommodate JVM overhead.
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
 </dd>
 <dt id="BamMetrics.targetMetrics.memory"><a href="#BamMetrics.targetMetrics.memory">BamMetrics.targetMetrics.memory</a></dt>
 <dd>
