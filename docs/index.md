@@ -25,15 +25,11 @@ For an overview of all available inputs, see [this page](./inputs.html).
 
 ```json
 {
-  "BamMetrics.reference": {
-    "fasta": "The path to the reference fasta file",
-    "fai": "The path to the index for the reference fasta",
-    "dict": "The path to the dict file for the reference fasta"
-  },
-  "BamMetrics.bam": {
-    "file": "A path to an input BAM file",
-    "index": "The path to the index for the ipnut BAM file"
-  }
+  "BamMetrics.referenceFasta": "The path to the reference fasta file",
+  "BamMetrics.referenceFastaFai": "The path to the index for the reference fasta",
+  "BamMetrics.referenceFastaDict": "The path to the sequence dictionary dict file for the reference fasta",
+  "BamMetrics.bam": "A path to an input BAM file",
+  "BamMetrics.bamIndex": "A path to the index of the BAM file."
 }
 ```
 
@@ -76,16 +72,12 @@ need a custom configuration to allow this.
 #### Example
 ```json
 {
-  "BamMetrics.reference": {
-    "fasta": "/home/user/genomes/human/GRCh38.fasta",
-    "fai": "/home/user/genomes/human/GRCh38.fasta.fai",
-    "dict": "/home/user/genomes/human/GRCh38.dict"
-  },
+  "BamMetrics.referenceFasta": "/home/user/genomes/human/GRCh38.fasta",
+  "BamMetrics.referenceFastaFai": "/home/user/genomes/human/GRCh38.fasta.fai",
+  "BamMetrics.referenceFastaDict": "/home/user/genomes/human/GRCh38.dict",
   "BamMetrics.outputDir": "/home/user/analysis/metrics",
-  "BamMetrics.bam": {
-    "file": "/home/user/mapping/results/s1.bam",
-    "index": "/home/user/mapping/results/s1.bai"
-  },
+  "BamMetrics.bam": "/home/user/mapping/results/s1.bam",
+  "BamMetrics.bamIndex": "/home/user/mapping/results/s1.bai",
   "BamMetrics.targetIntervals": [
     "/home/user/analysis/target1.bed",
     "/home/user/analysis/target2.bed"
