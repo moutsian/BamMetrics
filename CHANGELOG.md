@@ -11,6 +11,8 @@ that users understand how the changes affect the new version.
 
 version 2.0.0-dev
 ---------------------------
++ Add proper copyright headers to WDL files. So the free software license
+  is clear to end users who wish to adapt and modify.
 + Remove complex structs from the input.
 + Added inputs overview to the docs.
 + Added parameter_meta.
