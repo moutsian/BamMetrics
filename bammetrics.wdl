@@ -135,7 +135,6 @@ workflow BamMetrics {
         referenceFastaFai: {description: "The index for the reference fasta file.", category: "required"}
         collectAlignmentSummaryMetrics: {description: "Equivalent to the `PROGRAM=CollectAlignmentSummaryMetrics` argument in Picard.", category: "advanced"}
         meanQualityByCycle: {description: "Equivalent to the `PROGRAM=MeanQualityByCycle` argument in Picard.", category: "advanced"}
-        refRefflat: {description: "A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.", category: "common"}
         strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript).", category: "common"}
         refRefflat: {description: "A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.", category: "common"}
         targetIntervals: {description: "An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.", category: "common"}
