@@ -32,9 +32,11 @@ workflow BamMetrics {
         File referenceFasta
         File referenceFastaFai
         File referenceFastaDict
-        File? refRefflat
         String strandedness = "None"
+        Boolean collectAlignmentSummaryMetrics = true
+        Boolean meanQualityByCycle = true
 
+        File? refRefflat
         Array[File]+? targetIntervals
         File? ampliconIntervals
 
@@ -61,6 +63,8 @@ workflow BamMetrics {
             referenceFasta = referenceFasta,
             referenceFastaDict = referenceFastaDict,
             referenceFastaFai = referenceFastaFai,
+            collectAlignmentSummaryMetrics = collectAlignmentSummaryMetrics,
+            meanQualityByCycle = meanQualityByCycle,
             dockerImage = dockerImages["picard"]
     }
 
