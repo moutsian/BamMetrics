@@ -120,6 +120,7 @@ workflow BamMetrics {
         Array[File] picardMetricsFiles = picardMetrics.allStats
         Array[File] rnaMetrics = select_all([rnaSeqMetrics.metrics, rnaSeqMetrics.chart])
         Array[File] targetedPcrMetrics = select_all([targetMetrics.perTargetCoverage, targetMetrics.perBaseCoverage, targetMetrics.metrics])
+        Array[File] reports = flatten([picardMetricsFiles, rnaMetrics, targetedPcrMetrics])
     }
 
     parameter_meta {
