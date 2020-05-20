@@ -9,8 +9,9 @@ This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
 
-version 2.0.1-develop
+version 2.1.0-develop
 ---------------------------
++ Add reports output to the pipeline.
 + Move `collectAlignmentSummaryMetrics` & `meanQualityByCycle` to top level
   workflow so they can be set to false for TALON-WDL pipeline.
 + Tasks were updated to contain the `time_minutes` runtime attribute and
