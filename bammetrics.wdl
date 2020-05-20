@@ -32,9 +32,11 @@ workflow BamMetrics {
         File referenceFasta
         File referenceFastaFai
         File referenceFastaDict
-        File? refRefflat
         String strandedness = "None"
+        Boolean collectAlignmentSummaryMetrics = true
+        Boolean meanQualityByCycle = true
 
+        File? refRefflat
         Array[File]+? targetIntervals
         File? ampliconIntervals
 
@@ -61,6 +63,8 @@ workflow BamMetrics {
             referenceFasta = referenceFasta,
             referenceFastaDict = referenceFastaDict,
             referenceFastaFai = referenceFastaFai,
+            collectAlignmentSummaryMetrics = collectAlignmentSummaryMetrics,
+            meanQualityByCycle = meanQualityByCycle,
             dockerImage = dockerImages["picard"]
     }
 
@@ -130,14 +134,12 @@ workflow BamMetrics {
         referenceFasta: {description: "The reference fasta file.", category: "required"}
         referenceFastaDict: {description: "The sequence dictionary associated with the reference fasta file.", category: "required"}
         referenceFastaFai: {description: "The index for the reference fasta file.", category: "required"}
+        collectAlignmentSummaryMetrics: {description: "Equivalent to the `PROGRAM=CollectAlignmentSummaryMetrics` argument in Picard.", category: "advanced"}
+        meanQualityByCycle: {description: "Equivalent to the `PROGRAM=MeanQualityByCycle` argument in Picard.", category: "advanced"}
+        strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript).", category: "common"}
         refRefflat: {description: "A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.", category: "common"}
-        strandedness: {description: "The strandedness of the RNA sequencing library preparation. One of \"None\" (unstranded), \"FR\" (forward-reverse: first read equal transcript) or \"RF\" (reverse-forward: second read equals transcript).",
-                       category: "common"}
-        targetIntervals: {description: "An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.",
-                          category: "common"}
-        ampliconIntervals: {description: "An interval list describinig the coordinates of the amplicons sequenced. This should only be used for targeted sequencing or WES. Required if `ampliconIntervals` is defined.",
-                           category: "common"}
-        dockerImages: {description: "The docker images used. Changing this may result in errors which the developers may choose not to address.",
-                       category: "advanced"}
+        targetIntervals: {description: "An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.", category: "common"}
+        ampliconIntervals: {description: "An interval list describinig the coordinates of the amplicons sequenced. This should only be used for targeted sequencing or WES. Required if `ampliconIntervals` is defined.", category: "common"}
+        dockerImages: {description: "The docker images used. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
     }
 }
