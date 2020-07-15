@@ -45,6 +45,7 @@ workflow BamMetrics {
           "picard":"quay.io/biocontainers/picard:2.20.5--0",
         }
     }
+    meta {allowNestedInputs: true}
 
     String prefix = outputDir + "/" + basename(bam, ".bam")
 
