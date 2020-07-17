@@ -11,6 +11,7 @@ that users understand how the changes affect the new version.
 
 version 2.1.0-develop
 ---------------------------
++ Use the latest versions of samtools and picard by default.
 + Add a `reports` output for use in downstream pipelines.
 + Move `collectAlignmentSummaryMetrics` & `meanQualityByCycle` to top level
   workflow so they can be set to false for TALON-WDL pipeline.
