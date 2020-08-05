@@ -9,7 +9,7 @@ This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
 
-version 2.1.0-develop
+version 2.1.0
 ---------------------------
 + Use the latest versions of samtools and picard by default.
 + Add a `reports` output for use in downstream pipelines.
