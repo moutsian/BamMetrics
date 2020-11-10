@@ -2,7 +2,6 @@ Changelog
 ==========
 
 <!--
-
 Newest changes should be on top.
 
 This document is user facing. Please word the changes in such a way
@@ -42,5 +41,6 @@ version 1.1.0
 
 version 1.0.0
 ---------------------------
-+ Update documentation to reflect latest changes
-+ Picard: Use version 2.20.5 of the biocontainer as this includes the R dependency
++ Update documentation to reflect latest changes.
++ Picard: Use version 2.20.5 of the biocontainer as this includes
+  the R dependency.
