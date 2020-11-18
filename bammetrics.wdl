@@ -41,8 +41,8 @@ workflow BamMetrics {
         File? ampliconIntervals
 
         Map[String, String] dockerImages = {
-          "samtools":"quay.io/biocontainers/samtools:1.10--h9402c20_2",
-          "picard":"quay.io/biocontainers/picard:2.23.2--0",
+          "samtools":"quay.io/biocontainers/samtools:1.11--h6270b1f_0",
+          "picard":"quay.io/biocontainers/picard:2.23.8--0",
         }
     }
 
@@ -143,10 +143,10 @@ workflow BamMetrics {
         dockerImages: {description: "The docker images used. Changing this may result in errors which the developers may choose not to address.", category: "advanced"}
 
         # outputs
-        flagstats: {description: ""}
-        picardMetricsFiles: {description: ""}
-        rnaMetrics: {description: ""}
-        targetedPcrMetrics: {description: ""}
-        reports: {description: ""}
+        flagstats: {description: "Statistics output from flagstat."}
+        picardMetricsFiles: {description: "All statistics from the CollectMultipleMetrics tool."}
+        rnaMetrics: {description: "Statistics from the RNA metrics tool."}
+        targetedPcrMetrics: {description: "Statistics from the targeted PCR metrics tool."}
+        reports: {description: "All reports from this pipeline gathered into one array."}
     }
 }
