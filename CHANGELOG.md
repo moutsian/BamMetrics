@@ -8,6 +8,10 @@ This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
 
+version 2.1.1
+---------------------------
++ Update picard to version 2.23.8, samtools to version 1.11.
+
 version 2.1.0
 ---------------------------
 + Use the latest versions of samtools and picard by default.
