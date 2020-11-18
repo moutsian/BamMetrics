@@ -41,8 +41,8 @@ workflow BamMetrics {
         File? ampliconIntervals
 
         Map[String, String] dockerImages = {
-          "samtools":"quay.io/biocontainers/samtools:1.11--h6270b1f_0",
-          "picard":"quay.io/biocontainers/picard:2.23.8--0",
+            "samtools":"quay.io/biocontainers/samtools:1.11--h6270b1f_0",
+            "picard":"quay.io/biocontainers/picard:2.23.8--0",
         }
     }
 
