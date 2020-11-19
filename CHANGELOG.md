@@ -2,12 +2,15 @@ Changelog
 ==========
 
 <!--
-
 Newest changes should be on top.
 
 This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
+
+version 2.1.1
+---------------------------
++ Update picard to version 2.23.8, samtools to version 1.11.
 
 version 2.1.0
 ---------------------------
@@ -42,5 +45,6 @@ version 1.1.0
 
 version 1.0.0
 ---------------------------
-+ Update documentation to reflect latest changes
-+ Picard: Use version 2.20.5 of the biocontainer as this includes the R dependency
++ Update documentation to reflect latest changes.
++ Picard: Use version 2.20.5 of the biocontainer as this includes
+  the R dependency.
