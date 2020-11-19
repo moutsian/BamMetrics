@@ -8,7 +8,7 @@ This document is user facing. Please word the changes in such a way
 that users understand how the changes affect the new version.
 -->
 
-version 2.1.1
+version 2.2.0
 ---------------------------
 + Update picard to version 2.23.8, samtools to version 1.11.
 
