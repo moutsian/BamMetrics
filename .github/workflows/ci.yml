@@ -39,7 +39,7 @@ jobs:
           - dna
           - rna 
           - dna_targeted    
-      steps:
+    steps:
       - uses: actions/checkout@v2.3.4
         with:
           submodules: recursive
