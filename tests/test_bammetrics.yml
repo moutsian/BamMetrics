@@ -4,7 +4,7 @@
   command: >-
     cromwell run -o tests/cromwell_options.json
     -i tests/integration/dna.json bammetrics.wdl
-  stdout: &cromwell_stdout_succes
+  stdout: *cromwell_stdout_succes
     contains:
       - "WorkflowSucceededState"
   files:
@@ -28,7 +28,6 @@
     - path: "test-output/wgs1.quality_distribution_metrics"
     - path: "test-output/wgs1.quality_distribution.pdf"
     - path: "test-output/wgs1.quality_yield_metrics"
-    # These files should not be created by default.
     - path: "test-output/wgs1.targetPcrPerTargetCoverage"
       should_exist: false
     - path: "test-output/wgs1.targetPcrPerBaseCoverage"
