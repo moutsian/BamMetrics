@@ -38,7 +38,7 @@ jobs:
         test:
           - dna
           - rna 
-          - dna_targeted    
+          - dna_targeted
     steps:
       - uses: actions/checkout@v2.3.4
         with:
@@ -55,4 +55,3 @@ jobs:
         if: ${{ failure() }}
         # Get the last 1000 lines of the cromwell log to catch the error.
         run: bash -c 'tail -n 1000 /tmp/pytest_workflow_*/*/log.out'
-    
