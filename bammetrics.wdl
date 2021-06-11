@@ -46,7 +46,9 @@ workflow BamMetrics {
         }
     }
 
-    meta {allowNestedInputs: true}
+    meta {
+        allowNestedInputs: true
+    }
 
     String prefix = outputDir + "/" + basename(bam, ".bam")
 
