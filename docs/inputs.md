@@ -1,205 +1,209 @@
-# BamMetrics
+---
+layout: default
+title: "Inputs: BamMetrics"
+---
+
+# Inputs for BamMetrics
+
+The following is an overview of all available inputs in
+BamMetrics.
 
 
-## Inputs
+## Required inputs
+<dl>
+<dt id="BamMetrics.bam"><a href="#BamMetrics.bam">BamMetrics.bam</a></dt>
+<dd>
+    <i>File </i><br />
+    The BAM file for which metrics will be collected.
+</dd>
+<dt id="BamMetrics.bamIndex"><a href="#BamMetrics.bamIndex">BamMetrics.bamIndex</a></dt>
+<dd>
+    <i>File </i><br />
+    The index for the bam file.
+</dd>
+<dt id="BamMetrics.referenceFasta"><a href="#BamMetrics.referenceFasta">BamMetrics.referenceFasta</a></dt>
+<dd>
+    <i>File </i><br />
+    The reference fasta file.
+</dd>
+<dt id="BamMetrics.referenceFastaDict"><a href="#BamMetrics.referenceFastaDict">BamMetrics.referenceFastaDict</a></dt>
+<dd>
+    <i>File </i><br />
+    The sequence dictionary associated with the reference fasta file.
+</dd>
+<dt id="BamMetrics.referenceFastaFai"><a href="#BamMetrics.referenceFastaFai">BamMetrics.referenceFastaFai</a></dt>
+<dd>
+    <i>File </i><br />
+    The index for the reference fasta file.
+</dd>
+</dl>
 
+## Other common inputs
+<dl>
+<dt id="BamMetrics.ampliconIntervals"><a href="#BamMetrics.ampliconIntervals">BamMetrics.ampliconIntervals</a></dt>
+<dd>
+    <i>File? </i><br />
+    An interval list describinig the coordinates of the amplicons sequenced. This should only be used for targeted sequencing or WES. Required if `ampliconIntervals` is defined.
+</dd>
+<dt id="BamMetrics.outputDir"><a href="#BamMetrics.outputDir">BamMetrics.outputDir</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"."</code><br />
+    The directory to which the outputs will be written.
+</dd>
+<dt id="BamMetrics.refRefflat"><a href="#BamMetrics.refRefflat">BamMetrics.refRefflat</a></dt>
+<dd>
+    <i>File? </i><br />
+    A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.
+</dd>
+<dt id="BamMetrics.strandedness"><a href="#BamMetrics.strandedness">BamMetrics.strandedness</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"None"</code><br />
+    The strandedness of the RNA sequencing library preparation. One of "None" (unstranded), "FR" (forward-reverse: first read equal transcript) or "RF" (reverse-forward: second read equals transcript).
+</dd>
+<dt id="BamMetrics.targetIntervals"><a href="#BamMetrics.targetIntervals">BamMetrics.targetIntervals</a></dt>
+<dd>
+    <i>Array[File]+? </i><br />
+    An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.
+</dd>
+</dl>
 
-### Required inputs
-<p name="BamMetrics.bam">
-        <b>BamMetrics.bam</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The BAM file for which metrics will be collected.
-</p>
-<p name="BamMetrics.bamIndex">
-        <b>BamMetrics.bamIndex</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The index for the bam file.
-</p>
-<p name="BamMetrics.referenceFasta">
-        <b>BamMetrics.referenceFasta</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The reference fasta file.
-</p>
-<p name="BamMetrics.referenceFastaDict">
-        <b>BamMetrics.referenceFastaDict</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The sequence dictionary associated with the reference fasta file.
-</p>
-<p name="BamMetrics.referenceFastaFai">
-        <b>BamMetrics.referenceFastaFai</b><br />
-        <i>File &mdash; Default: None</i><br />
-        The index for the reference fasta file.
-</p>
-
-### Other common inputs
-<p name="BamMetrics.ampliconIntervals">
-        <b>BamMetrics.ampliconIntervals</b><br />
-        <i>File? &mdash; Default: None</i><br />
-        An interval list describinig the coordinates of the amplicons sequenced. This should only be used for targeted sequencing or WES. Required if `ampliconIntervals` is defined.
-</p>
-<p name="BamMetrics.outputDir">
-        <b>BamMetrics.outputDir</b><br />
-        <i>String &mdash; Default: "."</i><br />
-        The directory to which the outputs will be written.
-</p>
-<p name="BamMetrics.refRefflat">
-        <b>BamMetrics.refRefflat</b><br />
-        <i>File? &mdash; Default: None</i><br />
-        A refflat file containing gene annotations. If defined RNA sequencing metrics will be collected.
-</p>
-<p name="BamMetrics.strandedness">
-        <b>BamMetrics.strandedness</b><br />
-        <i>String &mdash; Default: "None"</i><br />
-        The strandedness of the RNA sequencing library preparation. One of "None" (unstranded), "FR" (forward-reverse: first read equal transcript) or "RF" (reverse-forward: second read equals transcript).
-</p>
-<p name="BamMetrics.targetIntervals">
-        <b>BamMetrics.targetIntervals</b><br />
-        <i>Array[File]+? &mdash; Default: None</i><br />
-        An interval list describing the coordinates of the targets sequenced. This should only be used for targeted sequencing or WES. If defined targeted PCR metrics will be collected. Requires `ampliconIntervals` to also be defined.
-</p>
-
-### Advanced inputs
+## Advanced inputs
 <details>
 <summary> Show/Hide </summary>
-<p name="BamMetrics.ampliconIntervalsLists.javaXmx">
-        <b>BamMetrics.ampliconIntervalsLists.javaXmx</b><br />
-        <i>String &mdash; Default: "3G"</i><br />
-        The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
-</p>
-<p name="BamMetrics.ampliconIntervalsLists.memory">
-        <b>BamMetrics.ampliconIntervalsLists.memory</b><br />
-        <i>String &mdash; Default: "4G"</i><br />
-        The amount of memory this job will use.
-</p>
-<p name="BamMetrics.ampliconIntervalsLists.timeMinutes">
-        <b>BamMetrics.ampliconIntervalsLists.timeMinutes</b><br />
-        <i>Int &mdash; Default: 5</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
-<p name="BamMetrics.collectAlignmentSummaryMetrics">
-        <b>BamMetrics.collectAlignmentSummaryMetrics</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectAlignmentSummaryMetrics` argument in Picard.
-</p>
-<p name="BamMetrics.dockerImages">
-        <b>BamMetrics.dockerImages</b><br />
-        <i>Map[String,String] &mdash; Default: {"samtools": "quay.io/biocontainers/samtools:1.11--h6270b1f_0", "picard": "quay.io/biocontainers/picard:2.23.8--0"}</i><br />
-        The docker images used. Changing this may result in errors which the developers may choose not to address.
-</p>
-<p name="BamMetrics.Flagstat.memory">
-        <b>BamMetrics.Flagstat.memory</b><br />
-        <i>String &mdash; Default: "256M"</i><br />
-        The amount of memory needed for the job.
-</p>
-<p name="BamMetrics.Flagstat.timeMinutes">
-        <b>BamMetrics.Flagstat.timeMinutes</b><br />
-        <i>Int &mdash; Default: 1 + ceil(size(inputBam,"G"))</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
-<p name="BamMetrics.meanQualityByCycle">
-        <b>BamMetrics.meanQualityByCycle</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=MeanQualityByCycle` argument in Picard.
-</p>
-<p name="BamMetrics.picardMetrics.collectBaseDistributionByCycle">
-        <b>BamMetrics.picardMetrics.collectBaseDistributionByCycle</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectBaseDistributionByCycle` argument.
-</p>
-<p name="BamMetrics.picardMetrics.collectGcBiasMetrics">
-        <b>BamMetrics.picardMetrics.collectGcBiasMetrics</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectGcBiasMetrics` argument.
-</p>
-<p name="BamMetrics.picardMetrics.collectInsertSizeMetrics">
-        <b>BamMetrics.picardMetrics.collectInsertSizeMetrics</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectInsertSizeMetrics` argument.
-</p>
-<p name="BamMetrics.picardMetrics.collectQualityYieldMetrics">
-        <b>BamMetrics.picardMetrics.collectQualityYieldMetrics</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectQualityYieldMetrics` argument.
-</p>
-<p name="BamMetrics.picardMetrics.collectSequencingArtifactMetrics">
-        <b>BamMetrics.picardMetrics.collectSequencingArtifactMetrics</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=CollectSequencingArtifactMetrics` argument.
-</p>
-<p name="BamMetrics.picardMetrics.javaXmxMb">
-        <b>BamMetrics.picardMetrics.javaXmxMb</b><br />
-        <i>Int &mdash; Default: 3072</i><br />
-        The maximum memory available to the program in megabytes. Should be lower than `memoryMb` to accommodate JVM overhead.
-</p>
-<p name="BamMetrics.picardMetrics.memoryMb">
-        <b>BamMetrics.picardMetrics.memoryMb</b><br />
-        <i>Int &mdash; Default: javaXmxMb + 512</i><br />
-        The amount of memory this job will use in megabytes.
-</p>
-<p name="BamMetrics.picardMetrics.qualityScoreDistribution">
-        <b>BamMetrics.picardMetrics.qualityScoreDistribution</b><br />
-        <i>Boolean &mdash; Default: true</i><br />
-        Equivalent to the `PROGRAM=QualityScoreDistribution` argument.
-</p>
-<p name="BamMetrics.picardMetrics.timeMinutes">
-        <b>BamMetrics.picardMetrics.timeMinutes</b><br />
-        <i>Int &mdash; Default: 1 + ceil((size(referenceFasta,"G") * 3 * 2)) + ceil((size(inputBam,"G") * 6))</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
-<p name="BamMetrics.rnaSeqMetrics.javaXmx">
-        <b>BamMetrics.rnaSeqMetrics.javaXmx</b><br />
-        <i>String &mdash; Default: "8G"</i><br />
-        The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
-</p>
-<p name="BamMetrics.rnaSeqMetrics.memory">
-        <b>BamMetrics.rnaSeqMetrics.memory</b><br />
-        <i>String &mdash; Default: "9G"</i><br />
-        The amount of memory this job will use.
-</p>
-<p name="BamMetrics.rnaSeqMetrics.timeMinutes">
-        <b>BamMetrics.rnaSeqMetrics.timeMinutes</b><br />
-        <i>Int &mdash; Default: 1 + ceil((size(inputBam,"G") * 12))</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
-<p name="BamMetrics.targetIntervalsLists.javaXmx">
-        <b>BamMetrics.targetIntervalsLists.javaXmx</b><br />
-        <i>String &mdash; Default: "3G"</i><br />
-        The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
-</p>
-<p name="BamMetrics.targetIntervalsLists.memory">
-        <b>BamMetrics.targetIntervalsLists.memory</b><br />
-        <i>String &mdash; Default: "4G"</i><br />
-        The amount of memory this job will use.
-</p>
-<p name="BamMetrics.targetIntervalsLists.timeMinutes">
-        <b>BamMetrics.targetIntervalsLists.timeMinutes</b><br />
-        <i>Int &mdash; Default: 5</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
-<p name="BamMetrics.targetMetrics.javaXmx">
-        <b>BamMetrics.targetMetrics.javaXmx</b><br />
-        <i>String &mdash; Default: "3G"</i><br />
-        The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
-</p>
-<p name="BamMetrics.targetMetrics.memory">
-        <b>BamMetrics.targetMetrics.memory</b><br />
-        <i>String &mdash; Default: "4G"</i><br />
-        The amount of memory this job will use.
-</p>
-<p name="BamMetrics.targetMetrics.timeMinutes">
-        <b>BamMetrics.targetMetrics.timeMinutes</b><br />
-        <i>Int &mdash; Default: 1 + ceil((size(inputBam,"G") * 6))</i><br />
-        The maximum amount of time the job will run in minutes.
-</p>
+<dl>
+<dt id="BamMetrics.ampliconIntervalsLists.javaXmx"><a href="#BamMetrics.ampliconIntervalsLists.javaXmx">BamMetrics.ampliconIntervalsLists.javaXmx</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"3G"</code><br />
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
+</dd>
+<dt id="BamMetrics.ampliconIntervalsLists.memory"><a href="#BamMetrics.ampliconIntervalsLists.memory">BamMetrics.ampliconIntervalsLists.memory</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
+    The amount of memory this job will use.
+</dd>
+<dt id="BamMetrics.ampliconIntervalsLists.timeMinutes"><a href="#BamMetrics.ampliconIntervalsLists.timeMinutes">BamMetrics.ampliconIntervalsLists.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>5</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+<dt id="BamMetrics.collectAlignmentSummaryMetrics"><a href="#BamMetrics.collectAlignmentSummaryMetrics">BamMetrics.collectAlignmentSummaryMetrics</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectAlignmentSummaryMetrics` argument in Picard.
+</dd>
+<dt id="BamMetrics.dockerImages"><a href="#BamMetrics.dockerImages">BamMetrics.dockerImages</a></dt>
+<dd>
+    <i>Map[String,String] </i><i>&mdash; Default:</i> <code>{"samtools": "quay.io/biocontainers/samtools:1.11--h6270b1f_0", "picard": "quay.io/biocontainers/picard:2.23.8--0"}</code><br />
+    The docker images used. Changing this may result in errors which the developers may choose not to address.
+</dd>
+<dt id="BamMetrics.Flagstat.memory"><a href="#BamMetrics.Flagstat.memory">BamMetrics.Flagstat.memory</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"256M"</code><br />
+    The amount of memory needed for the job.
+</dd>
+<dt id="BamMetrics.Flagstat.timeMinutes"><a href="#BamMetrics.Flagstat.timeMinutes">BamMetrics.Flagstat.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>1 + ceil(size(inputBam,"G"))</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+<dt id="BamMetrics.meanQualityByCycle"><a href="#BamMetrics.meanQualityByCycle">BamMetrics.meanQualityByCycle</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=MeanQualityByCycle` argument in Picard.
+</dd>
+<dt id="BamMetrics.picardMetrics.collectBaseDistributionByCycle"><a href="#BamMetrics.picardMetrics.collectBaseDistributionByCycle">BamMetrics.picardMetrics.collectBaseDistributionByCycle</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectBaseDistributionByCycle` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.collectGcBiasMetrics"><a href="#BamMetrics.picardMetrics.collectGcBiasMetrics">BamMetrics.picardMetrics.collectGcBiasMetrics</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectGcBiasMetrics` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.collectInsertSizeMetrics"><a href="#BamMetrics.picardMetrics.collectInsertSizeMetrics">BamMetrics.picardMetrics.collectInsertSizeMetrics</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectInsertSizeMetrics` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.collectQualityYieldMetrics"><a href="#BamMetrics.picardMetrics.collectQualityYieldMetrics">BamMetrics.picardMetrics.collectQualityYieldMetrics</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectQualityYieldMetrics` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.collectSequencingArtifactMetrics"><a href="#BamMetrics.picardMetrics.collectSequencingArtifactMetrics">BamMetrics.picardMetrics.collectSequencingArtifactMetrics</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=CollectSequencingArtifactMetrics` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.javaXmxMb"><a href="#BamMetrics.picardMetrics.javaXmxMb">BamMetrics.picardMetrics.javaXmxMb</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>3072</code><br />
+    The maximum memory available to the program in megabytes. Should be lower than `memoryMb` to accommodate JVM overhead.
+</dd>
+<dt id="BamMetrics.picardMetrics.memoryMb"><a href="#BamMetrics.picardMetrics.memoryMb">BamMetrics.picardMetrics.memoryMb</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>javaXmxMb + 512</code><br />
+    The amount of memory this job will use in megabytes.
+</dd>
+<dt id="BamMetrics.picardMetrics.qualityScoreDistribution"><a href="#BamMetrics.picardMetrics.qualityScoreDistribution">BamMetrics.picardMetrics.qualityScoreDistribution</a></dt>
+<dd>
+    <i>Boolean </i><i>&mdash; Default:</i> <code>true</code><br />
+    Equivalent to the `PROGRAM=QualityScoreDistribution` argument.
+</dd>
+<dt id="BamMetrics.picardMetrics.timeMinutes"><a href="#BamMetrics.picardMetrics.timeMinutes">BamMetrics.picardMetrics.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>1 + ceil((size(referenceFasta,"G") * 3 * 2)) + ceil((size(inputBam,"G") * 6))</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+<dt id="BamMetrics.rnaSeqMetrics.javaXmx"><a href="#BamMetrics.rnaSeqMetrics.javaXmx">BamMetrics.rnaSeqMetrics.javaXmx</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"8G"</code><br />
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
+</dd>
+<dt id="BamMetrics.rnaSeqMetrics.memory"><a href="#BamMetrics.rnaSeqMetrics.memory">BamMetrics.rnaSeqMetrics.memory</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"9G"</code><br />
+    The amount of memory this job will use.
+</dd>
+<dt id="BamMetrics.rnaSeqMetrics.timeMinutes"><a href="#BamMetrics.rnaSeqMetrics.timeMinutes">BamMetrics.rnaSeqMetrics.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>1 + ceil((size(inputBam,"G") * 12))</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+<dt id="BamMetrics.targetIntervalsLists.javaXmx"><a href="#BamMetrics.targetIntervalsLists.javaXmx">BamMetrics.targetIntervalsLists.javaXmx</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"3G"</code><br />
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
+</dd>
+<dt id="BamMetrics.targetIntervalsLists.memory"><a href="#BamMetrics.targetIntervalsLists.memory">BamMetrics.targetIntervalsLists.memory</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
+    The amount of memory this job will use.
+</dd>
+<dt id="BamMetrics.targetIntervalsLists.timeMinutes"><a href="#BamMetrics.targetIntervalsLists.timeMinutes">BamMetrics.targetIntervalsLists.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>5</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+<dt id="BamMetrics.targetMetrics.javaXmx"><a href="#BamMetrics.targetMetrics.javaXmx">BamMetrics.targetMetrics.javaXmx</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"3G"</code><br />
+    The maximum memory available to the program. Should be lower than `memory` to accommodate JVM overhead.
+</dd>
+<dt id="BamMetrics.targetMetrics.memory"><a href="#BamMetrics.targetMetrics.memory">BamMetrics.targetMetrics.memory</a></dt>
+<dd>
+    <i>String </i><i>&mdash; Default:</i> <code>"4G"</code><br />
+    The amount of memory this job will use.
+</dd>
+<dt id="BamMetrics.targetMetrics.timeMinutes"><a href="#BamMetrics.targetMetrics.timeMinutes">BamMetrics.targetMetrics.timeMinutes</a></dt>
+<dd>
+    <i>Int </i><i>&mdash; Default:</i> <code>1 + ceil((size(inputBam,"G") * 6))</code><br />
+    The maximum amount of time the job will run in minutes.
+</dd>
+</dl>
 </details>
 
 
 
 
-
-
-
-
-<hr />
-
-> Generated using WDL AID (0.1.1)
