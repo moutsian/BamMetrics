@@ -93,7 +93,7 @@ BamMetrics.
 </dd>
 <dt id="BamMetrics.dockerImages"><a href="#BamMetrics.dockerImages">BamMetrics.dockerImages</a></dt>
 <dd>
-    <i>Map[String,String] </i><i>&mdash; Default:</i> <code>{"samtools": "quay.io/biocontainers/samtools:1.10--h9402c20_2", "picard": "quay.io/biocontainers/picard:2.23.2--0"}</code><br />
+    <i>Map[String,String] </i><i>&mdash; Default:</i> <code>{"samtools": "quay.io/biocontainers/samtools:1.11--h6270b1f_0", "picard": "quay.io/biocontainers/picard:2.23.8--0"}</code><br />
     The docker images used. Changing this may result in errors which the developers may choose not to address.
 </dd>
 <dt id="BamMetrics.Flagstat.memory"><a href="#BamMetrics.Flagstat.memory">BamMetrics.Flagstat.memory</a></dt>
